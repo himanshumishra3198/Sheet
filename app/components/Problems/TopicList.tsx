@@ -1,3 +1,4 @@
+"use client";
 import {
   Accordion,
   AccordionContent,
@@ -29,7 +30,17 @@ const topics = [
   "tries",
   "strings advance",
 ];
-export const TopicList = async ({ problems }: { problems: ProblemType[] }) => {
+export const TopicList = ({
+  problems,
+  solvedProblemsIds,
+  addSolvedProblems,
+  removeSolvedProblems,
+}: {
+  problems: ProblemType[];
+  solvedProblemsIds: number[];
+  addSolvedProblems: (val: number) => void;
+  removeSolvedProblems: (val: number) => void;
+}) => {
   function checkProblemAvailable(topic: string, difficulty: string) {
     let flag = false;
     problems.forEach((problem) => {
@@ -61,7 +72,14 @@ export const TopicList = async ({ problems }: { problems: ProblemType[] }) => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ProblemTable problems={problems} type="easy" topic={topic} />
+                  <ProblemTable
+                    problems={problems}
+                    type="easy"
+                    topic={topic}
+                    solvedProblemsIds={solvedProblemsIds}
+                    addSolvedProblems={addSolvedProblems}
+                    removeSolvedProblems={removeSolvedProblems}
+                  />
                 </AccordionContent>
               </AccordionItem>
             )}
@@ -77,6 +95,9 @@ export const TopicList = async ({ problems }: { problems: ProblemType[] }) => {
                     problems={problems}
                     type="medium"
                     topic={topic}
+                    solvedProblemsIds={solvedProblemsIds}
+                    addSolvedProblems={addSolvedProblems}
+                    removeSolvedProblems={removeSolvedProblems}
                   />
                 </AccordionContent>
               </AccordionItem>
@@ -89,7 +110,14 @@ export const TopicList = async ({ problems }: { problems: ProblemType[] }) => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ProblemTable problems={problems} type="hard" topic={topic} />
+                  <ProblemTable
+                    problems={problems}
+                    type="hard"
+                    topic={topic}
+                    solvedProblemsIds={solvedProblemsIds}
+                    addSolvedProblems={addSolvedProblems}
+                    removeSolvedProblems={removeSolvedProblems}
+                  />
                 </AccordionContent>
               </AccordionItem>
             )}

@@ -22,7 +22,13 @@ interface ProgressBarProps {
 //   mediumSolved = 0,
 //   hardTotal = 136,
 //   hardSolved = 0,
-export default function ProgressBar({ problems }: { problems: ProblemType[] }) {
+export default function ProgressBar({
+  problems,
+  solvedProblemsIds,
+}: {
+  problems: ProblemType[];
+  solvedProblemsIds: number[];
+}) {
   // Calculate percentages
   let [totalProblems, setTotalProblems] = useState(0);
   let [totalSolved, setTotalSolved] = useState(0);
@@ -50,39 +56,34 @@ export default function ProgressBar({ problems }: { problems: ProblemType[] }) {
     setMediumTotal(medium);
     setHardTotal(hard);
 
-    let interval = undefined;
+    // let interval = undefined;
     if (status === "authenticated" && session && session.user) {
-      interval = setInterval(async () => {
-        easy = 0;
-        medium = 0;
-        hard = 0;
-        let res = await fetch(`/api/v1/problems/${session?.user?.id}`);
-        if (res.ok) {
-          const data = await res.json();
-          console.log(data);
-          const solved = data.problemIds as number[];
-          solved.map((solvedId) => {
-            problems.map((problem) => {
-              if (problem.id === solvedId) {
-                if (problem.difficulty === "easy") easy++;
-                else if (problem.difficulty === "medium") medium++;
-                else hard++;
-              }
-            });
-          });
-          setEasySolved(easy);
-          setMediumSolved(medium);
-          setHardSolved(hard);
-          setTotalSolved(easy + medium + hard);
-        }
-      }, 1500);
+      // interval = setInterval(async () => {
+      easy = 0;
+      medium = 0;
+      hard = 0;
+      // let res = await fetch(`/api/v1/problems/${session?.user?.id}`);
+
+      // const data = await res.json();
+
+      const solved = solvedProblemsIds;
+      solved.map((solvedId) => {
+        problems.map((problem) => {
+          if (problem.id === solvedId) {
+            if (problem.difficulty === "easy") easy++;
+            else if (problem.difficulty === "medium") medium++;
+            else hard++;
+          }
+        });
+      });
+      setEasySolved(easy);
+      setMediumSolved(medium);
+      setHardSolved(hard);
+      setTotalSolved(easy + medium + hard);
+
+      // }, 1500);
     }
-    if (interval) {
-      return () => {
-        clearInterval(interval);
-      };
-    }
-  }, [session]);
+  }, [session, solvedProblemsIds]);
 
   const totalPercentage = totalProblems
     ? totalProblems > 0

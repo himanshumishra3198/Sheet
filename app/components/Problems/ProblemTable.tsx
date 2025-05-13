@@ -24,32 +24,23 @@ export function ProblemTable({
   problems,
   type,
   topic,
+  solvedProblemsIds,
+  addSolvedProblems,
+  removeSolvedProblems,
 }: {
   problems: ProblemType[];
   type: string;
   topic: string;
+  solvedProblemsIds: number[];
+  addSolvedProblems: (val: number) => void;
+  removeSolvedProblems: (val: number) => void;
 }) {
-  const [solved, setSolved] = useState<number[]>([]);
+  // const [solved, setSolved] = useState<number[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const { data: session, status } = useSession();
   const [visible, setVisible] = useState(false);
   const user = useFetchUser(session?.user?.id, session);
   const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
-
-  async function fetchProblems() {
-    if (session?.user?.id) {
-      let res = await fetch(`/api/v1/problems/${session.user.id}`);
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data);
-        setSolved(data.problemIds as number[]);
-      }
-    }
-  }
-  // if (user) setVisible(user?.confetti);
-  useEffect(() => {
-    fetchProblems();
-  }, []);
 
   const confettiColors = ["#bb0000", "#ffffff"];
   useEffect(() => {
@@ -111,10 +102,10 @@ export function ProblemTable({
     }
 
     if (value) {
-      setSolved((prev) => [...prev, problemId]);
+      addSolvedProblems(problemId);
       if (user && user.confetti) setVisible(true);
     } else {
-      setSolved((prev) => prev.filter((id) => id !== problemId));
+      removeSolvedProblems(problemId);
     }
     const res = await fetch(
       `/api/v1/problem-status?problemId=${problemId}&&userId=${session?.user?.id}&&status=${value}`,
@@ -130,7 +121,7 @@ export function ProblemTable({
         problem.difficulty === type && problem.topic === topic
     )
     .map((problem) => {
-      let marked = solved.includes(problem.id);
+      let marked = solvedProblemsIds.includes(problem.id);
       return (
         <TableRow
           key={problem.id * 10000}
