@@ -23,12 +23,17 @@ jobs:
       - name: Deploy to droplet
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_GOOGLE_ID: ${{ secrets.AUTH_GOOGLE_ID }}
+          AUTH_GOOGLE_SECRET: ${{ secrets.AUTH_GOOGLE_SECRET }}
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << EOF
           export DATABASE_URL='${DATABASE_URL}'
+          export AUTH_SECRET='${AUTH_SECRET}'
+          export AUTH_GOOGLE_ID='${AUTH_GOOGLE_ID}'
+          export AUTH_GOOGLE_SECRET='${AUTH_GOOGLE_SECRET}'
 
-          echo "DATABASE_URL=${DATABASE_URL}" > /root/Sheet/.env
-
+          # Ensure Sheet directory exists and pull latest code
           if [ -d "/root/Sheet" ]; then
             echo "Repository exists. Pulling latest changes..."
             cd /root/Sheet
@@ -39,7 +44,15 @@ jobs:
             cd /root/Sheet
           fi
 
+          # Write environment variables to .env and .env.local
+          echo "DATABASE_URL=${DATABASE_URL}" > /root/Sheet/.env
+          echo "AUTH_SECRET=${AUTH_SECRET}" > /root/Sheet/.env.local
+          echo "AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}" >> /root/Sheet/.env.local
+          echo "AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}" >> /root/Sheet/.env.local
+
+          # Install dependencies and build the app
           npm install
+          npx prisma migrate deploy
           npx prisma generate
 
           cd problems
@@ -48,10 +61,12 @@ jobs:
 
           npm run build || { echo "Build failed"; exit 1; }
 
+          # Restart using PM2
           if pm2 list | grep -q "sheet-app"; then
             pm2 restart sheet-app
           else
             pm2 start npm --name "sheet-app" -- start --cwd /root/Sheet
           fi
+
           pm2 save
           EOF
