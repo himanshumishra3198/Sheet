@@ -25,6 +25,9 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << 'EOF' 
+            export DATABASE_URL='${DATABASE_URL}'
+
+            echo "DATABASE_URL=${DATABASE_URL}" > Sheet/.env
             # Check for Sheet repo
             if [ -d "Sheet" ]; then
               echo "Repository exists. Pulling latest changes..."
@@ -35,10 +38,6 @@ jobs:
               git clone https://github.com/himanshumishra3198/Sheet.git
               cd Sheet
             fi
-
-            # Export env variable
-            echo "Setting DATABASE_URL"
-            echo "DATABASE_URL=${DATABASE_URL}" > .env 
 
             # Install dependencies and build
             npm install
