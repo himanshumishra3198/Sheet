@@ -38,7 +38,7 @@ jobs:
 
             # Export env variable
             echo "Setting DATABASE_URL"
-            echo "DATABASE_URL=${DATABASE_URL}" > .env
+            echo "DATABASE_URL=${DATABASE_URL}" > .env 
 
             # Install dependencies and build
             npm install
