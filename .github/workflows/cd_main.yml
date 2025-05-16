@@ -45,7 +45,7 @@ jobs:
             npx prisma generate
 
             cd problems
-            node filter.js
+            node filter.mjs
             cd ..
 
             npm run build
