@@ -24,7 +24,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << 'EOF' 
             # Check for Sheet repo
             if [ -d "Sheet" ]; then
               echo "Repository exists. Pulling latest changes..."
