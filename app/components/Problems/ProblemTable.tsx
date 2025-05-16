@@ -121,7 +121,7 @@ export function ProblemTable({
         problem.difficulty === type && problem.topic === topic
     )
     .map((problem) => {
-      let marked = solvedProblemsIds.includes(problem.id);
+      const marked = solvedProblemsIds.includes(problem.id);
       return (
         <TableRow
           key={problem.id * 10000}

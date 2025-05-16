@@ -11,7 +11,7 @@ export function useFetchUser(
   email: string;
   confetti: boolean;
 } | null {
-  let [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
   async function getUser() {
     const res = await fetch(`/api/v1/user/${id}`);
     if (res.ok) {

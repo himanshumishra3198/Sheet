@@ -30,14 +30,14 @@ export default function ProgressBar({
   solvedProblemsIds: number[];
 }) {
   // Calculate percentages
-  let [totalProblems, setTotalProblems] = useState(0);
-  let [totalSolved, setTotalSolved] = useState(0);
-  let [easyTotal, setEasyTotal] = useState(0);
-  let [easySolved, setEasySolved] = useState(0);
-  let [mediumTotal, setMediumTotal] = useState(0);
-  let [mediumSolved, setMediumSolved] = useState(0);
-  let [hardTotal, setHardTotal] = useState(0);
-  let [hardSolved, setHardSolved] = useState(0);
+  const [totalProblems, setTotalProblems] = useState(0);
+  const [totalSolved, setTotalSolved] = useState(0);
+  const [easyTotal, setEasyTotal] = useState(0);
+  const [easySolved, setEasySolved] = useState(0);
+  const [mediumTotal, setMediumTotal] = useState(0);
+  const [mediumSolved, setMediumSolved] = useState(0);
+  const [hardTotal, setHardTotal] = useState(0);
+  const [hardSolved, setHardSolved] = useState(0);
   const { data: session, status } = useSession();
 
   useEffect(() => {

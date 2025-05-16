@@ -13,7 +13,7 @@ export function Dashboard({ problems }: { problems: ProblemType[] }) {
 
   async function fetchProblems() {
     if (session?.user?.id) {
-      let res = await fetch(`/api/v1/problems/${session.user.id}`);
+      const res = await fetch(`/api/v1/problems/${session.user.id}`);
       if (res.ok) {
         const data = await res.json();
         console.log(data);
