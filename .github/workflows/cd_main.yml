@@ -1,0 +1,61 @@
+name: Deploy the main app
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Debug
+        run: echo "Workflow triggered"
+
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+
+      - name: Deploy to droplet
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << 'EOF'
+            # Check for Sheet repo
+            if [ -d "Sheet" ]; then
+              echo "Repository exists. Pulling latest changes..."
+              cd Sheet
+              git pull origin main
+            else
+              echo "Cloning repository..."
+              git clone https://github.com/himanshumishra3198/Sheet.git
+              cd Sheet
+            fi
+
+            # Export env variable
+            echo "Setting DATABASE_URL"
+            echo "DATABASE_URL=${DATABASE_URL}" > .env
+
+            # Install dependencies and build
+            npm install
+            npx prisma generate
+
+            cd problems
+            node filter.js
+            cd ..
+
+            npm run build
+
+            # Restart the app using PM2
+            if pm2 list | grep -q "sheet-app"; then
+              pm2 restart sheet-app
+            else
+              pm2 start npm --name "sheet-app" -- start
+            fi
+
+            pm2 save
+          EOF
