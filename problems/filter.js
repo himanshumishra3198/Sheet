@@ -1,4 +1,5 @@
-import fs from "fs";
+// import fs from "fs";
+const fs = require("fs");
 import { PrismaClient } from "../lib/generated/prisma/client.js";
 const prisma = new PrismaClient();
 async function importProblems() {
