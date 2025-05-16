@@ -24,36 +24,34 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << 'EOF' 
-            export DATABASE_URL='${DATABASE_URL}'
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << EOF
+          export DATABASE_URL='${DATABASE_URL}'
 
-            echo "DATABASE_URL=${DATABASE_URL}" > Sheet/.env
-            # Check for Sheet repo
-            if [ -d "Sheet" ]; then
-              echo "Repository exists. Pulling latest changes..."
-              cd Sheet
-              git pull origin main
-            else
-              echo "Cloning repository..."
-              git clone https://github.com/himanshumishra3198/Sheet.git
-              cd Sheet
-            fi
+          echo "DATABASE_URL=${DATABASE_URL}" > /root/Sheet/.env
 
-            # Install dependencies and build
-            npm install
-            npx prisma generate
+          if [ -d "/root/Sheet" ]; then
+            echo "Repository exists. Pulling latest changes..."
+            cd /root/Sheet
+            git pull origin main
+          else
+            echo "Cloning repository..."
+            git clone https://github.com/himanshumishra3198/Sheet.git /root/Sheet
+            cd /root/Sheet
+          fi
 
-            cd problems
-            node filter.mjs
-            cd ..
+          npm install
+          npx prisma generate
 
-            npm run build
+          cd problems
+          node filter.mjs
+          cd ..
 
-            # Restart the app using PM2
-            if pm2 list | grep -q "sheet-app"; then
-              pm2 restart sheet-app
-            else 
-              pm2 start npm --name "sheet-app" -- start
-            fi
-            pm2 save
+          npm run build || { echo "Build failed"; exit 1; }
+
+          if pm2 list | grep -q "sheet-app"; then
+            pm2 restart sheet-app
+          else
+            pm2 start npm --name "sheet-app" -- start --cwd /root/Sheet
+          fi
+          pm2 save
           EOF
