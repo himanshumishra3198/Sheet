@@ -26,11 +26,12 @@ jobs:
           AUTH_GOOGLE_SECRET: ${{ secrets.AUTH_GOOGLE_SECRET }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << EOF
           export DATABASE_URL='${DATABASE_URL}'
           export AUTH_GOOGLE_ID='${AUTH_GOOGLE_ID}'
           export AUTH_GOOGLE_SECRET='${AUTH_GOOGLE_SECRET}'
           export NEXTAUTH_URL='${NEXTAUTH_URL}'
+          export NODE_ENV=production
 
           # Ensure Sheet directory exists and pull latest code
           if [ -d "/root/Sheet" ]; then
@@ -43,15 +44,18 @@ jobs:
             cd /root/Sheet
           fi
 
+          # Remove any existing .env.local to avoid conflict
+          rm -f /root/Sheet/.env.local
+
           # Write environment variables to .env.production
           echo "DATABASE_URL=${DATABASE_URL}" > /root/Sheet/.env.production
           echo "AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}" >> /root/Sheet/.env.production
           echo "AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}" >> /root/Sheet/.env.production
           echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> /root/Sheet/.env.production
+          echo "AUTH_SECRET=\$(openssl rand -hex 32)" >> /root/Sheet/.env.production
 
-          # Install dependencies and build
+          # Install dependencies and build the app
           npm install
-          npx auth secret
           npx prisma migrate deploy
           npx prisma generate
 
