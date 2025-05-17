@@ -78,9 +78,9 @@ jobs:
 
           # Restart using PM2
           if pm2 list | grep -q "sheet-app"; then
-            pm2 restart sheet-app --env production
+            pm2 restart sheet-app 
           else
-            pm2 start npm --name "sheet-app" -- start --env production
+            pm2 start npm --name "sheet-app" 
           fi
 
           pm2 save
