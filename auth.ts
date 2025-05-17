@@ -7,6 +7,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
+  debug: true,
   callbacks: {
     async jwt({ token, user }) {
       if (user && user.email) {
