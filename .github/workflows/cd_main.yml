@@ -25,39 +25,61 @@ jobs:
           AUTH_GOOGLE_ID: ${{ secrets.AUTH_GOOGLE_ID }}
           AUTH_GOOGLE_SECRET: ${{ secrets.AUTH_GOOGLE_SECRET }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << EOF
-          export DATABASE_URL='${DATABASE_URL}'
-          export AUTH_GOOGLE_ID='${AUTH_GOOGLE_ID}'
-          export AUTH_GOOGLE_SECRET='${AUTH_GOOGLE_SECRET}'
-          export NEXTAUTH_URL='${NEXTAUTH_URL}'
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@128.199.27.128 << 'EOF'
+          set -euo pipefail
+
           export NODE_ENV=production
 
-          # Ensure Sheet directory exists and pull latest code
-          if [ -d "/root/Sheet" ]; then
+          REPO_DIR="/root/Sheet"
+          cd /root
+
+          # Clone or update repo
+          if [ -d "$REPO_DIR" ]; then
             echo "Repository exists. Pulling latest changes..."
-            cd /root/Sheet
+            cd "$REPO_DIR"
+            git reset --hard
+            git clean -fd
             git pull origin main
           else
             echo "Cloning repository..."
-            git clone https://github.com/himanshumishra3198/Sheet.git /root/Sheet
-            cd /root/Sheet
+            git clone https://github.com/himanshumishra3198/Sheet.git "$REPO_DIR"
+            cd "$REPO_DIR"
           fi
 
-          # Remove any existing .env.local to avoid conflict
-          rm -f /root/Sheet/.env.local
+          # Write .env.production
+          cat > "$REPO_DIR/.env.production" <<ENV
+          DATABASE_URL='${DATABASE_URL}'
+          AUTH_GOOGLE_ID='${AUTH_GOOGLE_ID}'
+          AUTH_GOOGLE_SECRET='${AUTH_GOOGLE_SECRET}'
+          NEXTAUTH_URL='${NEXTAUTH_URL}'
+          AUTH_SECRET='${AUTH_SECRET}'
+          ENV
 
-          # Write environment variables to .env.production
-          echo "DATABASE_URL=${DATABASE_URL}" > /root/Sheet/.env.production
-          echo "AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}" >> /root/Sheet/.env.production
-          echo "AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}" >> /root/Sheet/.env.production
-          echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> /root/Sheet/.env.production
-          echo "AUTH_SECRET=\$(openssl rand -hex 32)" >> /root/Sheet/.env.production
+          # Write PM2 ecosystem config
+          cat > "$REPO_DIR/ecosystem.config.js" <<CONFIG
+          module.exports = {
+            apps: [
+              {
+                name: "sheet-app",
+                script: "npm",
+                args: "start",
+                env_production: {
+                  NODE_ENV: "production",
+                  DATABASE_URL: "${DATABASE_URL}",
+                  AUTH_GOOGLE_ID: "${AUTH_GOOGLE_ID}",
+                  AUTH_GOOGLE_SECRET: "${AUTH_GOOGLE_SECRET}",
+                  NEXTAUTH_URL: "${NEXTAUTH_URL}",
+                  AUTH_SECRET: "${AUTH_SECRET}"
+                }
+              }
+            ]
+          };
+          CONFIG
 
-          # Install dependencies and build the app
-          npm install
-          # start
-            
+          cd "$REPO_DIR"
+
           # Install dependencies
           npm ci --omit=dev
 
@@ -74,14 +96,10 @@ jobs:
 
           echo "==> Building Next.js App"
           npm run build
-          # end       
 
-          # Restart using PM2
-          if pm2 list | grep -q "sheet-app"; then
-            pm2 restart sheet-app --env production
-          else
-            pm2 start npm --name "sheet-app" -- start --env production
-          fi
-
+          echo "==> Starting app with PM2"
+          pm2 delete sheet-app || true
+          pm2 start ecosystem.config.js --env production
           pm2 save
+          pm2 startup
           EOF
