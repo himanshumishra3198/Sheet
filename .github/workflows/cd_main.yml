@@ -56,14 +56,25 @@ jobs:
 
           # Install dependencies and build the app
           npm install
+          # start
+            
+          # Install dependencies
+          npm ci --omit=dev
+
+          echo "==> Running Prisma Migrate"
           npx prisma migrate deploy
+
+          echo "==> Generating Prisma Client"
           npx prisma generate
 
+          echo "==> Running problems filter"
           cd problems
           node filter.mjs
           cd ..
 
-          npm run build || { echo "Build failed"; exit 1; }
+          echo "==> Building Next.js App"
+          npm run build
+          # end       
 
           # Restart using PM2
           if pm2 list | grep -q "sheet-app"; then
