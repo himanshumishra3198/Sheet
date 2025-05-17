@@ -16,27 +16,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: "jwt",
   },
   debug: isProduction,
-
   callbacks: {
     async jwt({ token, user }) {
-      if (user?.email) {
-        const dbUser = await prismaClient.user.findUnique({
-          where: { email: user.email },
-        });
-        token.id =
-          dbUser?.id ||
-          (
-            await prismaClient.user.create({
+      try {
+        if (user?.email) {
+          console.log("JWT callback - user.email:", user.email);
+
+          const dbUser = await prismaClient.user.findUnique({
+            where: { email: user.email },
+          });
+
+          if (dbUser) {
+            token.id = dbUser.id;
+          } else {
+            const newUser = await prismaClient.user.create({
               data: {
                 email: user.email,
                 name: user.name,
                 avatar: user.image ?? "",
               },
-            })
-          ).id;
+            });
+            token.id = newUser.id;
+          }
+        }
+      } catch (error) {
+        console.error("Error in JWT callback:", error);
       }
+
       return token;
     },
+
     async session({ session, token }) {
       if (token.id && session.user) {
         session.user.id = token.id as string;
