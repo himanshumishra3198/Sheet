@@ -127,7 +127,7 @@ export const TopicList = ({
     );
   });
   return (
-    <div className="my-16 mx-16 flex items-center justify-center text-[var(--gray-100)] container p-4 bg-[var(--gray-900)] rounded-2xl shadow-neutral-800">
+    <div className="flex items-center justify-center text-[var(--gray-100)] container p-4 bg-[var(--gray-900)] rounded-2xl shadow-neutral-800">
       <Accordion type="multiple" className="w-full">
         {renderTopics}
       </Accordion>
