@@ -2,15 +2,20 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { prismaClient } from "./prisma/src";
 
+const productionDomain = "https://chalk.hm0.org";
+const isProduction = process.env.NODE_ENV === "production";
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
-  trustHost: true, // Only needed if not using Vercel/AWS
-  basePath: "/api/auth", // Explicit base path
+  trustHost: true, // Explicitly trust the host
+  basePath: "/api/auth",
+  theme: {
+    logo: `${productionDomain}/logo.png`, // Absolute URL for logo
+  },
   session: {
     strategy: "jwt",
   },
-  secret: process.env.AUTH_SECRET, // Must be set in production
-  debug: process.env.NODE_ENV !== "production",
+  debug: !isProduction,
   callbacks: {
     async jwt({ token, user }) {
       if (user?.email) {
@@ -40,13 +45,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   cookies: {
     sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+      name: `${isProduction ? "__Secure-" : ""}next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
-        secure: process.env.NODE_ENV === "production",
-        domain: process.env.NODE_ENV === "production" ? ".hm0.org" : undefined,
+        secure: isProduction,
+        domain: isProduction ? ".hm0.org" : undefined, // Root domain for all subdomains
       },
     },
   },
