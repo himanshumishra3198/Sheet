@@ -15,7 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  debug: !isProduction,
+  debug: isProduction,
+
   callbacks: {
     async jwt({ token, user }) {
       if (user?.email) {
@@ -41,18 +42,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.id = token.id as string;
       }
       return session;
-    },
-  },
-  cookies: {
-    sessionToken: {
-      name: `${isProduction ? "__Secure-" : ""}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: isProduction,
-        domain: isProduction ? ".hm0.org" : undefined, // Root domain for all subdomains
-      },
     },
   },
 });
