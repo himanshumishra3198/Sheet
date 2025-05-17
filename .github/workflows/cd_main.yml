@@ -44,6 +44,9 @@ jobs:
             cd /root/Sheet
           fi
 
+          # Remove any existing .env.local to avoid conflict
+          rm -f /root/Sheet/.env.local
+
           # Write environment variables to .env.production
           echo "DATABASE_URL=${DATABASE_URL}" > /root/Sheet/.env.production
           echo "AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}" >> /root/Sheet/.env.production
