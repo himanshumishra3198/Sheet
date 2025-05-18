@@ -52,7 +52,6 @@ jobs:
           echo "AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}" >> /root/Sheet/.env.local
           echo "AUTH_URL=${NEXTAUTH_URL}" >> /root/Sheet/.env.local
 
-
           # Install dependencies and build the app
           npm install
           # start            
