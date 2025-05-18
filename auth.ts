@@ -4,7 +4,6 @@ import Google from "next-auth/providers/google";
 import { PrismaClient } from "./lib/generated/prisma";
 const prismaClient = new PrismaClient();
 const productionDomain = "https://chalk.hm0.org";
-const isProduction = process.env.NODE_ENV === "production";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
@@ -13,7 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  debug: isProduction,
+  debug: true,
   callbacks: {
     async jwt({ token, user }) {
       try {
@@ -23,6 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const dbUser = await prismaClient.user.findUnique({
             where: { email: user.email },
           });
+          console.log("dbUser here: ", dbUser);
 
           if (dbUser) {
             token.id = dbUser.id;
@@ -34,6 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 avatar: user.image ?? "",
               },
             });
+            console.log("newUser here: ", newUser);
             token.id = newUser.id;
           }
         }
