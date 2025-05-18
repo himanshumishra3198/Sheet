@@ -1,6 +1,6 @@
-import { Dashboard } from "./components/Dashboard";
 import { prismaClient } from "@/prisma/src";
 import { ProblemType } from "./utils/ProblemType";
+import App from "./App";
 
 export default async function Home() {
   const data: ProblemType[] = await prismaClient.problem.findMany();
@@ -9,9 +9,5 @@ export default async function Home() {
   //   console.error("Error disconnecting Prisma:", e);
   // });
   // console.log(data);
-  return (
-    <div className="h-screen w-screen">
-      <Dashboard problems={data} />
-    </div>
-  );
+  return <App problems={data} />;
 }
