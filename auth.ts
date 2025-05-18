@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
-import { PrismaClient } from "./lib/generated/prisma";
+import { PrismaClient } from "./lib/generated/prisma/client.js";
 const prismaClient = new PrismaClient();
 const productionDomain = "https://chalk.hm0.org";
 
