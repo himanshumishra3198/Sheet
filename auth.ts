@@ -2,8 +2,6 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
 import { PrismaClient } from "./lib/generated/prisma/client.js";
-const prismaClient = new PrismaClient();
-const productionDomain = "https://chalk.hm0.org";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
@@ -14,6 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   debug: true,
   callbacks: {
     async jwt({ token, user }) {
+      const prismaClient = new PrismaClient();
       try {
         if (user?.email) {
           console.log("DATABASE URL: ", process.env.DATABASE_URL);
