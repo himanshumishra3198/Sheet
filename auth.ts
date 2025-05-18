@@ -13,6 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       const prismaClient = new PrismaClient();
+
       try {
         if (user?.email) {
           console.log("DATABASE URL: ", process.env.DATABASE_URL);
