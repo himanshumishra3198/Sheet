@@ -1,4 +1,5 @@
 import { prismaClient } from "@/prisma/src";
+// import { PrismaClient } from "../../../../lib/generated/prisma/client.js";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {

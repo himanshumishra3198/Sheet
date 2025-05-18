@@ -9,9 +9,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   trustHost: true, // Explicitly trust the host
   basePath: "/api/auth",
-  theme: {
-    logo: `${productionDomain}/logo.png`, // Absolute URL for logo
-  },
   session: {
     strategy: "jwt",
   },
