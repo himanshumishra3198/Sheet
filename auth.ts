@@ -34,6 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 avatar: user.image ?? "",
               },
             });
+
             console.log("newUser here: ", newUser);
             token.id = newUser.id;
           }
