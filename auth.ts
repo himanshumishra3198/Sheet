@@ -16,6 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       try {
+        console.log("DATABASE URL: ", process.env.DATABASE_URL);
         if (user?.email) {
           console.log("JWT callback - user.email:", user.email);
 
