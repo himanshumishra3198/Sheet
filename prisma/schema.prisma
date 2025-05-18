@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
   output   = "../lib/generated/prisma"
@@ -10,35 +9,35 @@ datasource db {
 }
 
 model User {
-  id        Int   @id @default(autoincrement()) 
-  email     String @unique
-  name      String?  
-  confetti  Boolean @default(true)
-  createdAt DateTime @default(now())  
-  avatar    String?
+  id             Int             @id @default(autoincrement())
+  email          String          @unique
+  name           String?
+  confetti       Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  avatar         String?
   solvedProblems SolvedProblem[]
 }
 
-
-
 model Problem {
-  id        Int   @id @default(autoincrement()) 
-  title     String  
-  leetcodeUrl String ?
-  gfgUrl   String ?
-  difficulty String
-  topic String
-  @@unique([title, topic]) 
-  solvedBy  SolvedProblem[]
+  id          Int             @id @default(autoincrement())
+  title       String
+  leetcodeUrl String?
+  gfgUrl      String?
+  difficulty  String
+  topic       String
+  solvedBy    SolvedProblem[]
+
+  @@unique([title, topic])
 }
 
-model SolvedProblem {   
-  userId    Int  
-  problemId Int  
-  createdAt DateTime @default(now())  
+model SolvedProblem {
+  userId    Int
+  problemId Int
+  createdAt DateTime @default(now())
   notes     String?
   solved    Boolean
-  user      User   @relation(fields: [userId], references: [id])
-  problem   Problem @relation(fields: [problemId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  problem   Problem  @relation(fields: [problemId], references: [id])
+
   @@id([userId, problemId])
 }

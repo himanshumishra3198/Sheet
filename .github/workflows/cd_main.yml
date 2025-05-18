@@ -71,9 +71,9 @@ jobs:
           node filter.mjs
           cd ..
 
-          echo "==> Building Next.js App"
-          npm run build
-          # end       
+          # echo "==> Building Next.js App"
+          # npm run build
+          # # end       
 
           # Restart using PM2
           if pm2 list | grep -q "sheet-app"; then
