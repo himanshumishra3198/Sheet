@@ -8,7 +8,6 @@ const productionDomain = "https://chalk.hm0.org";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   trustHost: true, // Explicitly trust the host
-  basePath: "/api/auth",
   session: {
     strategy: "jwt",
   },
@@ -16,8 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       try {
-        console.log("DATABASE URL: ", process.env.DATABASE_URL);
         if (user?.email) {
+          console.log("DATABASE URL: ", process.env.DATABASE_URL);
           console.log("JWT callback - user.email:", user.email);
 
           const dbUser = await prismaClient.user.findUnique({
