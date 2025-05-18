@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import { prismaClient } from "./prisma/src";
 
+import { PrismaClient } from "./lib/generated/prisma";
+const prismaClient = new PrismaClient();
 const productionDomain = "https://chalk.hm0.org";
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -36,7 +37,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             token.id = newUser.id;
           }
         }
+        await prismaClient.$disconnect();
       } catch (error) {
+        await prismaClient.$disconnect();
         console.error("Error in JWT callback:", error);
       }
 
