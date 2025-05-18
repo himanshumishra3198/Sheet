@@ -55,16 +55,13 @@ jobs:
 
           # Install dependencies and build the app
           npm install
-          # start
-            
-          # Install dependencies
-          npm install
+          # start            
 
           echo "==> Running Prisma Migrate"
-          npx prisma migrate deploy
+          npx prisma migrate dev
 
           echo "==> Generating Prisma Client"
-          npx prisma generate
+          npx prisma generate dev
 
           echo "==> Running problems filter"
           cd problems
