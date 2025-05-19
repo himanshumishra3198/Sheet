@@ -22,8 +22,9 @@ ENV AUTH_URL=${AUTH_URL}
 ENV AUTH_TRUST_HOST=${AUTH_TRUST_HOST}
 
 RUN npm run db:generate
-RUN npm run db:problems
+# RUN npm run db:problems
 RUN npm run build
 
 EXPOSE 3001
-CMD ["npm", "run", "start"]
+CMD [ "sh", "-c", "npm run db:generate && npm run db:problems && npm run start" ]
+
