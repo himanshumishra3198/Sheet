@@ -20,7 +20,6 @@ export async function GET(
       where: { userId, solved: true },
       select: { problemId: true },
     });
-
     const ids = problemIds.map((p) => p.problemId);
     await prismaClient.$disconnect();
     return new Response(JSON.stringify({ problemIds: ids }), {
