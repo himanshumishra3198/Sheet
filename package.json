@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack --port 3001",
     "build": "next build",
     "start": "next start --port 3001",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "cd prisma && npx prisma migrate dev && npx prisma generate && cd ..",
+    "db:problems": "cd problems && node filter.mjs && cd .."
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
