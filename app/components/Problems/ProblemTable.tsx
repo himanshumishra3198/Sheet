@@ -125,7 +125,7 @@ export function ProblemTable({
       return (
         <TableRow
           key={problem.id * 10000}
-          className={marked ? "bg-green-700" : ""}
+          className={marked ? "bg-green-900" : "hover:bg-muted/30"}
         >
           <TableCell className="w-1/6">
             <Checkbox

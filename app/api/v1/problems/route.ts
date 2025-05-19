@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   try {
     const data = await prismaClient.problem.findMany();
     await prismaClient.$disconnect();
-    console.log("data", data);
+
     return new Response(JSON.stringify({ data }), {
       status: 200,
       headers: { "Content-Type": "application/json" },

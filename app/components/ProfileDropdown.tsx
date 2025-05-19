@@ -61,8 +61,10 @@ export default function ProfileDropdown({
         <DropdownMenuSeparator />
         <DropdownMenuItem className="flex items-center justify-between cursor-default">
           <span>Confetti</span>
+
           <Switch
             checked={confetti}
+            id="light"
             onCheckedChange={async () => {
               await fetch(
                 `/api/v1/user/${user.id}?confetti=${
