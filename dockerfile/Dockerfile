@@ -21,8 +21,7 @@ ENV AUTH_SECRET=${AUTH_SECRET}
 ENV AUTH_URL=${AUTH_URL}
 ENV AUTH_TRUST_HOST=${AUTH_TRUST_HOST}
 
-RUN npm run db:generate
-# RUN npm run db:problems
+# RUN npm run db:generate
 RUN npm run build
 
 EXPOSE 3001
