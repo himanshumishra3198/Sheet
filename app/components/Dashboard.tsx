@@ -29,7 +29,7 @@ export function Dashboard({ problems }: { problems: ProblemType[] }) {
     <div className="h-screen w-screen bg-[var(--gray-1000)] text-[var(--gray-100)] overflow-x-hidden">
       <Navbar />
       <HeroSection />
-      <div className="w-screen flex items-center justify-center pt-12 px-8 ">
+      <div className="w-full flex items-center justify-center pt-12 px-8 ">
         <ProgressBar
           problems={problems}
           solvedProblemsIds={solvedProblemsIds}
