@@ -103,7 +103,10 @@ export function ProblemTable({
 
     if (value) {
       addSolvedProblems(problemId);
-      if (user && user.confetti) setVisible(true);
+      if (user && user.confetti) {
+        setVisible(false);
+        setVisible(true);
+      }
     } else {
       removeSolvedProblems(problemId);
     }
