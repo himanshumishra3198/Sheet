@@ -186,17 +186,19 @@ export function ProblemTable({
       <Table className="text-lg">
         <TableHeader className="">
           <TableRow>
-            <TableHead className="w-1/6 text-[var(--gray-200)]">
+            <TableHead className="w-1/6 text-[var(--gray-200)] hover:bg-muted/30">
               Status
             </TableHead>
-            <TableHead className="w-1/2 text-[var(--gray-200)]">
+            <TableHead className="w-1/2 text-[var(--gray-200)] hover:bg-muted/30">
               Problem
             </TableHead>
-            <TableHead className="w-1/6 text-[var(--gray-200)]">
+            <TableHead className="w-1/6 text-[var(--gray-200)] hover:bg-muted/30">
               Leetcode
             </TableHead>
-            <TableHead className="w-1/6 text-[var(--gray-200)]">GFG</TableHead>
-            <TableHead className="w-1/6 text-[var(--gray-200)] text-right">
+            <TableHead className="w-1/6 text-[var(--gray-200)] hover:bg-muted/30">
+              GFG
+            </TableHead>
+            <TableHead className="w-1/6 text-[var(--gray-200)] text-right hover:bg-muted/30">
               Difficulty
             </TableHead>
           </TableRow>
