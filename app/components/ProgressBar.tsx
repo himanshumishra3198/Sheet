@@ -97,7 +97,7 @@ export default function ProgressBar({
   const offset = circumference - (totalPercentage / 100) * circumference;
 
   return (
-    <Card className="text-[var(--gray-100)] container p-6 bg-[var(--gray-900)] rounded-2xl shadow-neutral-800 border-0">
+    <Card className="text-[var(--gray-100)] block p-6 bg-[var(--gray-900)] rounded-2xl shadow-neutral-800 border-0">
       <div className="flex items-center justify-between">
         <div className="flex flex-col">
           <span className="text-sm font-medium mb-1">Total Progress</span>
