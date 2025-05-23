@@ -100,7 +100,6 @@ export function ProblemTable({
       setModalOpen(true);
       return;
     }
-
     if (value) {
       addSolvedProblems(problemId);
       if (user && user.confetti) {
