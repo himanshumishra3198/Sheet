@@ -19,6 +19,7 @@ export function useFetchUser(
       setUser(data);
     }
   }
+
   useEffect(() => {
     if (id) {
       getUser();
