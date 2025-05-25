@@ -22,7 +22,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             where: { email: user.email },
           });
           console.log("dbUser here: ", dbUser);
-
           if (dbUser) {
             token.id = dbUser.id;
           } else {
