@@ -18,7 +18,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (user?.email) {
           console.log("DATABASE URL: ", process.env.DATABASE_URL);
           console.log("JWT callback - user.email:", user.email);
-
           const dbUser = await prismaClient.user.findUnique({
             where: { email: user.email },
           });
