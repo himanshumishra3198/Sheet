@@ -1,6 +1,5 @@
-// import { prismaClient } from "@/prisma/src";
-import { PrismaClient } from "../../../../lib/generated/prisma/client.js";
-const prismaClient = new PrismaClient();
+import { prismaClient } from "@/prisma/src";
+
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -36,14 +35,14 @@ export async function POST(req: NextRequest) {
         solved: status,
       },
     });
-    await prismaClient.$disconnect();
+
     return new Response(JSON.stringify({ success: true, data: result }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     console.error("Error saving problem status:", error);
-    prismaClient.$disconnect();
+
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

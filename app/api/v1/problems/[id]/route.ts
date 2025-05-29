@@ -1,7 +1,7 @@
-// import { prismaClient } from "@/prisma/src";
-import { PrismaClient } from "@/lib/generated/prisma";
+import { prismaClient } from "@/prisma/src";
+
 import { NextRequest } from "next/server";
-const prismaClient = new PrismaClient();
+
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -21,14 +21,14 @@ export async function GET(
       select: { problemId: true },
     });
     const ids = problemIds.map((p) => p.problemId);
-    await prismaClient.$disconnect();
+
     return new Response(JSON.stringify({ problemIds: ids }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     console.error("Failed to fetch problems:", error);
-    await prismaClient.$disconnect();
+
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
     });
