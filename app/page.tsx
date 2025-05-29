@@ -22,7 +22,7 @@ export default function Home() {
   //   console.error("Error disconnecting Prisma:", e);
   // });
   // console.log(data);
-  if (!problems) {
+  if (problems.length === 0) {
     return <div>Loading...</div>;
   }
   return <App problems={problems} />;

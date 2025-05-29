@@ -40,12 +40,13 @@ jobs:
             # Create network if not exists
             docker network inspect sheet_network >/dev/null 2>&1 || docker network create sheet_network
 
-            echo "Pulling latest image..."
-            docker pull himanshumishra3198/sheet-app:${{ github.sha }}
-            echo "Stopping and removing old container..."
 
             # Clean up old containers
             docker stop sheet_app 2>/dev/null && docker rm sheet_app 2>/dev/null || true
+
+            echo "Pulling latest image..."
+            docker pull himanshumishra3198/sheet-app:${{ github.sha }}
+                      
 
             # Run new container attached to chalk_network
             docker run --name sheet_app --network sheet_network -d --restart unless-stopped -p 3001:3001 \
