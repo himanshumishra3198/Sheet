@@ -8,6 +8,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// This schema defines the database structure for a problem-solving platform.
 model User {
   id             Int             @id @default(autoincrement())
   email          String          @unique
