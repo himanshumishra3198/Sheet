@@ -16,15 +16,13 @@ import {
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useEffect, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
-import { AuthModal } from "../AuthModal";
-import { useFetchUser } from "@/app/hooks/useFetchUser";
 
 export function ProblemTable({
   problems,
   type,
   topic,
   solvedProblemsIds,
+  confetti: confettiEnabled,
   addSolvedProblems,
   removeSolvedProblems,
 }: {
@@ -32,14 +30,12 @@ export function ProblemTable({
   type: string;
   topic: string;
   solvedProblemsIds: number[];
+  confetti: boolean;
   addSolvedProblems: (val: number) => void;
   removeSolvedProblems: (val: number) => void;
 }) {
   // const [solved, setSolved] = useState<number[]>([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const { data: session, status } = useSession();
   const [visible, setVisible] = useState(false);
-  const user = useFetchUser(session?.user?.id, session);
   const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const confettiColors = ["#bb0000", "#ffffff"];
@@ -95,26 +91,16 @@ export function ProblemTable({
       };
     }
   }, [visible]);
-  async function handleMarked(value: boolean, problemId: number) {
-    if (!session?.user) {
-      setModalOpen(true);
-      return;
-    }
+  function handleMarked(value: boolean, problemId: number) {
     if (value) {
       addSolvedProblems(problemId);
-      if (user && user.confetti) {
+      if (confettiEnabled) {
         setVisible(false);
         setVisible(true);
       }
     } else {
       removeSolvedProblems(problemId);
     }
-    const res = await fetch(
-      `/api/v1/problem-status?problemId=${problemId}&&userId=${session?.user?.id}&&status=${value}`,
-      {
-        method: "POST",
-      }
-    );
   }
 
   const renderProblems = problems
@@ -202,13 +188,6 @@ export function ProblemTable({
         </TableHeader>
         <TableBody>{renderProblems}</TableBody>
       </Table>
-      <AuthModal
-        isOpen={modalOpen}
-        onClose={() => {
-          setModalOpen(false);
-        }}
-        authType="login"
-      />
     </>
   );
 }

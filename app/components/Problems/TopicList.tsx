@@ -33,11 +33,13 @@ const topics = [
 export const TopicList = ({
   problems,
   solvedProblemsIds,
+  confetti,
   addSolvedProblems,
   removeSolvedProblems,
 }: {
   problems: ProblemType[];
   solvedProblemsIds: number[];
+  confetti: boolean;
   addSolvedProblems: (val: number) => void;
   removeSolvedProblems: (val: number) => void;
 }) => {
@@ -77,6 +79,7 @@ export const TopicList = ({
                     type="easy"
                     topic={topic}
                     solvedProblemsIds={solvedProblemsIds}
+                    confetti={confetti}
                     addSolvedProblems={addSolvedProblems}
                     removeSolvedProblems={removeSolvedProblems}
                   />
@@ -96,6 +99,7 @@ export const TopicList = ({
                     type="medium"
                     topic={topic}
                     solvedProblemsIds={solvedProblemsIds}
+                    confetti={confetti}
                     addSolvedProblems={addSolvedProblems}
                     removeSolvedProblems={removeSolvedProblems}
                   />
@@ -115,6 +119,7 @@ export const TopicList = ({
                     type="hard"
                     topic={topic}
                     solvedProblemsIds={solvedProblemsIds}
+                    confetti={confetti}
                     addSolvedProblems={addSolvedProblems}
                     removeSolvedProblems={removeSolvedProblems}
                   />

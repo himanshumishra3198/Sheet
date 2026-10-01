@@ -59,10 +59,6 @@ cat > .env <<EOF
 SHEET_DB_NAME=sheet
 SHEET_DB_USER=sheet
 SHEET_DB_PASSWORD=$SHEET_DB_PASSWORD
-AUTH_URL=https://$DOMAIN
-AUTH_SECRET=$(openssl rand -base64 33)
-AUTH_GOOGLE_ID=<google client id>
-AUTH_GOOGLE_SECRET=<google client secret>
 EOF
 chmod 600 .env
 ```
@@ -107,9 +103,6 @@ scoped to the `rankarena-*` repositories, add this one.
 The old secrets (`DOCKERHUB_*`, `SSH_PRIVATE_KEY`, `DATABASE_URL`, `AUTH_*`)
 are no longer used and can be deleted. App config lives in the server's
 `~/sheet/.env` instead.
-
-In Google Cloud Console, add `https://$DOMAIN/api/auth/callback/google` to the
-OAuth client's authorized redirect URIs.
 
 Then push to `main` (or run the workflow by hand). Check it came up:
 

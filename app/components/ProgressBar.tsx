@@ -2,7 +2,6 @@
 import { Card } from "@/components/ui/card";
 import { ProblemType } from "../utils/ProblemType";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 
 export default function ProgressBar({
   problems,
@@ -19,7 +18,6 @@ export default function ProgressBar({
   const [mediumSolved, setMediumSolved] = useState(0);
   const [hardTotal, setHardTotal] = useState(0);
   const [hardSolved, setHardSolved] = useState(0);
-  const { data: session, status } = useSession();
 
   useEffect(() => {
     let easy = problems.filter((p) => p.difficulty === "easy").length;
@@ -31,27 +29,25 @@ export default function ProgressBar({
     setMediumTotal(medium);
     setHardTotal(hard);
 
-    if (status === "authenticated" && session && session.user) {
-      easy = 0;
-      medium = 0;
-      hard = 0;
+    easy = 0;
+    medium = 0;
+    hard = 0;
 
-      solvedProblemsIds.forEach((solvedId) => {
-        problems.forEach((problem) => {
-          if (problem.id === solvedId) {
-            if (problem.difficulty === "easy") easy++;
-            else if (problem.difficulty === "medium") medium++;
-            else if (problem.difficulty === "hard") hard++;
-          }
-        });
+    solvedProblemsIds.forEach((solvedId) => {
+      problems.forEach((problem) => {
+        if (problem.id === solvedId) {
+          if (problem.difficulty === "easy") easy++;
+          else if (problem.difficulty === "medium") medium++;
+          else if (problem.difficulty === "hard") hard++;
+        }
       });
+    });
 
-      setEasySolved(easy);
-      setMediumSolved(medium);
-      setHardSolved(hard);
-      setTotalSolved(easy + medium + hard);
-    }
-  }, [session, solvedProblemsIds]);
+    setEasySolved(easy);
+    setMediumSolved(medium);
+    setHardSolved(hard);
+    setTotalSolved(easy + medium + hard);
+  }, [problems, solvedProblemsIds]);
 
   const totalPercentage = totalProblems
     ? Math.round((totalSolved / totalProblems) * 100)
