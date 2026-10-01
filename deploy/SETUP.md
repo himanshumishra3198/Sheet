@@ -1,118 +1,59 @@
 # Hosting Sheet on the rankarenas EC2 box
 
-Sheet runs as its own compose project in `/home/ubuntu/sheet`, next to
-rankarena in `/home/ubuntu/rankarena`. It shares three things with rankarena:
+Sheet is a static site: `next build` exports plain HTML/CSS/JS, and the
+Docker image serves it with an unprivileged nginx (`dockerfile/`). There is
+no database and no Node server at runtime; progress lives in each visitor's
+browser.
 
-- **nginx** — rankarena's proxy (ports 80/443) routes Sheet's domain to the
-  `sheet` container over the `rankarena_default` docker network.
-- **postgres** — Sheet has its own `sheet` database and role inside
-  rankarena's postgres container.
-- **certbot** — rankarena's certbot container also renews Sheet's cert.
+It runs as its own compose project in `/home/ubuntu/sheet`, next to
+rankarena in `/home/ubuntu/rankarena`, and shares two things with it:
+
+- **nginx**: rankarena's proxy (ports 80/443) terminates TLS for hm0.org and
+  forwards to the `sheet` container over the `rankarena_default` network.
+- **certbot**: rankarena's certbot container also renews the hm0.org cert.
 
 ```
-internet ─► rankarena proxy (nginx :443)
+internet ─► rankarena proxy (nginx :443, TLS)
               ├─ rankarenas.com, admin., api.  ─► rankarena containers
-              └─ $DOMAIN                       ─► sheet:3001 ─► postgres/sheet
+              └─ hm0.org, www.hm0.org          ─► sheet:3001 (static nginx)
 ```
 
-Everything below is one-time. After it, every push to `main` builds the image,
-pushes it to ECR and restarts the container (`.github/workflows/deploy.yml`).
-Migrations and the problem list are applied on container start.
+Every push to `main` builds the image, pushes it to ECR and restarts the
+container (`.github/workflows/deploy.yml`).
 
-Throughout, set the domain once in your shell:
+## One-time setup (already done for hm0.org)
+
+1. **DNS**: A records for `@` and `www` pointing at the instance's Elastic IP.
+2. **Certificate**, issued through rankarena's certbot (its port-80 server
+   answers ACME challenges for any host). This must exist before the nginx
+   server block below is deployed, or nginx refuses to start:
+
+   ```sh
+   cd ~/rankarena
+   docker compose -f docker-compose.prod.yml run --rm --entrypoint certbot certbot \
+     certonly --webroot -w /var/www/certbot -d hm0.org -d www.hm0.org \
+     --email <you@example.com> --agree-tos --no-eff-email
+   ```
+
+3. **Routing**: the `hm0.org` server blocks live in rankarena's
+   `nginx/nginx.conf`. Edit them there, not on the box: every rankarena
+   deploy overwrites the server's copy.
+4. **ECR**: a `sheet-app` repository in us-east-1 with rankarena's lifecycle
+   policy (`scripts/ecr-lifecycle-policy.json` in the rankarena repo).
+5. **GitHub secrets** on this repo: `AWS_ACCESS_KEY_ID`,
+   `AWS_SECRET_ACCESS_KEY`, `EC2_HOST`, `EC2_SSH_KEY` (same values as
+   rankarena's).
+6. `mkdir ~/sheet` on the box; CI writes `docker-compose.prod.yml` and `.env`.
+
+## Local development
 
 ```sh
-DOMAIN=hm0.org
+npm install
+npm run dev        # http://localhost:3001
+npm run build      # static export in out/
+npm run preview    # serve out/ on http://localhost:3001
 ```
 
-## 1. DNS
-
-Point `$DOMAIN` (and `www.$DOMAIN`, if wanted) at the box with an A record to
-the instance's public IP. Make sure that IP is an Elastic IP, or it changes
-the next time the instance stops.
-
-## 2. Server prep (ssh ubuntu@<ec2>)
-
-Add swap. The box has 2GB RAM and none, and now runs two apps:
-
-```sh
-sudo fallocate -l 2G /swapfile && sudo chmod 600 /swapfile
-sudo mkswap /swapfile && sudo swapon /swapfile
-echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-```
-
-Create the database and role inside rankarena's postgres:
-
-```sh
-SHEET_DB_PASSWORD=$(openssl rand -hex 24)
-docker exec -i rankarena-postgres-1 sh -c 'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"' <<SQL
-CREATE ROLE sheet LOGIN PASSWORD '$SHEET_DB_PASSWORD';
-CREATE DATABASE sheet OWNER sheet;
-SQL
-```
-
-Create the env file (`deploy/.env.example` documents every key):
-
-```sh
-mkdir -p ~/sheet && cd ~/sheet
-cat > .env <<EOF
-SHEET_DB_NAME=sheet
-SHEET_DB_USER=sheet
-SHEET_DB_PASSWORD=$SHEET_DB_PASSWORD
-EOF
-chmod 600 .env
-```
-
-## 3. TLS certificate
-
-Rankarena's port-80 server already answers ACME challenges for any host, so
-issue the cert through its certbot container. This must succeed **before**
-the nginx change in step 6 is deployed: nginx refuses to start if a
-referenced certificate is missing, which would take rankarenas down too.
-
-```sh
-cd ~/rankarena
-docker compose -f docker-compose.prod.yml run --rm --entrypoint certbot certbot \
-  certonly --webroot -w /var/www/certbot \
-  -d $DOMAIN -d www.$DOMAIN \
-  --email <you@example.com> --agree-tos --no-eff-email
-```
-
-Renewal is automatic: the running certbot container renews every cert it has.
-
-## 4. AWS (from a machine with admin credentials)
-
-```sh
-aws ecr create-repository --repository-name sheet-app --region us-east-1
-aws ecr put-lifecycle-policy --repository-name sheet-app --region us-east-1 \
-  --lifecycle-policy-text file://<rankarena>/scripts/ecr-lifecycle-policy.json
-```
-
-The CI IAM user must be allowed to push to `sheet-app`. If its policy is
-scoped to the `rankarena-*` repositories, add this one.
-
-## 5. GitHub secrets (Sheet repo → Settings → Secrets → Actions)
-
-| Secret                  | Value                                       |
-| ----------------------- | ------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | the CI IAM user's key, same as rankarena's  |
-| `AWS_SECRET_ACCESS_KEY` | its secret                                  |
-| `EC2_HOST`              | the instance's public IP / hostname         |
-| `EC2_SSH_KEY`           | private key for `ubuntu@` on the instance   |
-
-The old secrets (`DOCKERHUB_*`, `SSH_PRIVATE_KEY`, `DATABASE_URL`, `AUTH_*`)
-are no longer used and can be deleted. App config lives in the server's
-`~/sheet/.env` instead.
-
-Then push to `main` (or run the workflow by hand). Check it came up:
-
-```sh
-docker logs sheet-sheet-1 | tail     # "All migrations ... applied", "Ready"
-```
-
-## 6. Route the domain in rankarena's nginx
-
-The `hm0.org` server blocks live in rankarena's `nginx/nginx.conf`. Commit,
-and push. Rankarena's deploy copies the file to the box and restarts the
-proxy. Edit the repo, not the box: every rankarena deploy overwrites
-the server's copy.
+Problems live in `problems/problems.json`; topic names, URLs and
+descriptions in `lib/topic-meta.ts`. Saved progress is keyed by topic key
+and title, so renaming a problem resets its tick for people who solved it.

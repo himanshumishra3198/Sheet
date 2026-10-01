@@ -1,39 +1,60 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { IconSprite } from "@/components/icons";
+import { JsonLd } from "@/components/JsonLd";
+import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/seo-copy";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
-import { Rabbit } from "lucide-react";
 
-const geistSans = Geist({
+const geist = Geist({
+  subsets: ["latin"],
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const roboto = Roboto({
-  variable: "--font-roboto",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "Sheet",
-  description: "Data structures and algorithms problems sheet",
-  icons: {
-    icon: "rabbit.ico",
-  },
+  metadataBase: new URL(SITE_URL),
+  title: { default: HOME_TITLE, template: `%s | ${SITE_NAME}` },
+  description: HOME_DESCRIPTION,
+  applicationName: SITE_NAME,
+  formatDetection: { telephone: false },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f6f8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b0f" },
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${roboto.variable}  antialiased`}>{children}</body>
+    <html lang="en" className={geist.variable}>
+      <body>
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: SITE_NAME,
+            url: SITE_URL,
+            description: HOME_DESCRIPTION,
+            inLanguage: "en",
+          }}
+        />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-3 focus:py-2"
+        >
+          Skip to content
+        </a>
+        <IconSprite />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -2,7 +2,7 @@
 .github
 .next
 node_modules
-lib/generated
+out
 .env
 **/.env
 .env.*

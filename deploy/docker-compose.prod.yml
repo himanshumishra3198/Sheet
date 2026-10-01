@@ -1,18 +1,21 @@
 # Runs on the rankarenas EC2 box, in /home/ubuntu/sheet.
 #
-# Sheet has no proxy or database of its own: it joins rankarena's compose
-# network so rankarena's nginx can reach it as `sheet:3001`, and it stores its
-# data in a separate `sheet` database inside rankarena's postgres container.
-# Nothing is published on the host; all traffic comes in through that nginx.
+# The image is the static export of the app served by an unprivileged nginx
+# (see dockerfile/). It joins rankarena's compose network so rankarena's
+# nginx can reach it as `sheet:3001`; nothing is published on the host.
 
 services:
   sheet:
     image: ${ECR_REGISTRY}/sheet-app:${IMAGE_TAG}
-    environment:
-      DATABASE_URL: postgresql://${SHEET_DB_USER}:${SHEET_DB_PASSWORD}@postgres:5432/${SHEET_DB_NAME}
-      # The box has 2GB shared with all of rankarena; keep the heap bounded.
-      NODE_OPTIONS: --max-old-space-size=256
-    mem_limit: 400m
+    # Static files only: no writes outside nginx's temp dir, no privileges.
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 64m
     networks:
       - rankarena
     restart: unless-stopped

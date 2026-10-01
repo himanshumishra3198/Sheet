@@ -112,7 +112,6 @@ jobs:
               || echo "ECR_REGISTRY=$REGISTRY" >> .env
 
             docker compose -f docker-compose.prod.yml pull
-            # Container start runs `prisma migrate deploy` + the problem upsert.
             docker compose -f docker-compose.prod.yml up -d --remove-orphans
 
             # Drop superseded sheet-app images only; rankarena's deploy
