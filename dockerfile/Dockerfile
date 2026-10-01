@@ -19,6 +19,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 ENV NODE_ENV=production
+# Run unprivileged; next start only needs to write its cache.
+RUN chown -R node:node .next
+USER node
 EXPOSE 3001
 
 # Apply pending migrations and upsert the problem list (both idempotent),
