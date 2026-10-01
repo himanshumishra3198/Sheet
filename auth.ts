@@ -9,12 +9,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  debug: true,
+  debug: process.env.NODE_ENV !== "production",
   callbacks: {
     async jwt({ token, user }) {
       try {
         if (user?.email) {
-          console.log("DATABASE URL: ", process.env.DATABASE_URL);
           console.log("JWT callback - user.email:", user.email);
           const dbUser = await prismaClient.user.findUnique({
             where: { email: user.email },
