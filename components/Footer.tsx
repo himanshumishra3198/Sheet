@@ -40,7 +40,7 @@ export function Footer() {
           {SITE_NAME} is free to use. Problems link out to LeetCode and
           GeeksforGeeks for practice. Your progress is stored only in this
           browser and is never sent to a server; a problem that appears in both
-          sheets is ticked in both. We use Google Analytics to count visits.
+          sheets is ticked in both.
         </p>
       </div>
     </footer>
