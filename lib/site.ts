@@ -34,3 +34,7 @@ export function socialMetadata({
     twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }
+
+// Google Analytics 4 property "A2Z DSA Sheet (hm0.org)". Public by design:
+// the id is visible in the page source either way.
+export const GA_MEASUREMENT_ID = "G-7R0WRXLQGP";

@@ -22,7 +22,8 @@ export function Footer() {
         <p className="mt-10 max-w-2xl text-xs leading-relaxed text-muted">
           {SITE_NAME} is free to use. Problems link out to LeetCode and
           GeeksforGeeks for practice. Your progress is stored only in this
-          browser; there is no account and nothing is sent to a server.
+          browser and is never sent to a server. We use Google Analytics to
+          count visits.
         </p>
       </div>
     </footer>
