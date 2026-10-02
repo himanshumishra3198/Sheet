@@ -1,0 +1,1162 @@
+{
+  "topics": [
+    {
+      "name": "Arrays",
+      "patterns": [
+        {
+          "name": "Linear Scan",
+          "problems": [
+            {
+              "title": "Majority Element-I",
+              "difficulty": "core",
+              "a2z": "arrays/majority-element-n-2-times"
+            },
+            {
+              "title": "Kadane's Algorithm",
+              "difficulty": "core",
+              "a2z": "arrays/kadanes-algorithm-maximum-subarray-sum"
+            },
+            {
+              "title": "Majority Element-II",
+              "difficulty": "core",
+              "a2z": "arrays/majority-element-n-3-times"
+            },
+            {
+              "title": "Maximum Product Subarray in an Array",
+              "difficulty": "core",
+              "a2z": "arrays/maximum-product-subarray"
+            }
+          ]
+        },
+        {
+          "name": "Two Pointers",
+          "problems": [
+            {
+              "title": "Sort an array of 0's 1's and 2's",
+              "difficulty": "core",
+              "a2z": "arrays/sort-an-array-of-0s-1s-and-2s"
+            },
+            {
+              "title": "3 Sum",
+              "difficulty": "core",
+              "a2z": "arrays/3-sum-problem"
+            },
+            {
+              "title": "Next Permutation",
+              "difficulty": "core",
+              "a2z": "arrays/next-permutation"
+            },
+            {
+              "title": "4 Sum",
+              "difficulty": "pro",
+              "a2z": "arrays/4-sum-problem"
+            },
+            {
+              "title": "Merge two sorted arrays without extra space",
+              "difficulty": "core",
+              "a2z": "arrays/merge-two-sorted-arrays-without-extra-space"
+            },
+            {
+              "title": "Trapping Rainwater",
+              "difficulty": "pro",
+              "a2z": "stack-queue/trapping-rainwater"
+            }
+          ]
+        },
+        {
+          "name": "Divide and Conquer",
+          "problems": [
+            {
+              "title": "Count Inversions",
+              "difficulty": "pro",
+              "a2z": "arrays/count-inversions"
+            },
+            {
+              "title": "Reverse Pairs",
+              "difficulty": "pro",
+              "a2z": "arrays/reverse-pairs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hashing",
+      "patterns": [
+        {
+          "name": "Hashing & Prefix Sums",
+          "problems": [
+            {
+              "title": "Two Sum",
+              "difficulty": "basic",
+              "a2z": "arrays/2sum-problem"
+            },
+            {
+              "title": "Longest Consecutive Sequence in an Array",
+              "difficulty": "core",
+              "a2z": "arrays/longest-consecutive-sequence-in-an-array"
+            },
+            {
+              "title": "Longest subarray with sum K",
+              "difficulty": "core",
+              "a2z": "arrays/longest-subarray-with-sum-k-positives-negatives"
+            },
+            {
+              "title": "Count subarrays with given sum",
+              "difficulty": "core",
+              "a2z": "arrays/count-subarrays-with-given-sum"
+            },
+            {
+              "title": "Count subarrays with given xor K",
+              "difficulty": "pro",
+              "a2z": "arrays/count-number-of-subarrays-with-given-xor-k"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Binary Search",
+      "patterns": [
+        {
+          "name": "Binary Search",
+          "problems": [
+            {
+              "title": "Find peak element",
+              "difficulty": "core",
+              "a2z": "binary-search/find-peak-element"
+            },
+            {
+              "title": "Find minimum in Rotated Sorted Array",
+              "difficulty": "core",
+              "a2z": "binary-search/find-minimum-in-rotated-sorted-array"
+            },
+            {
+              "title": "Search in rotated sorted array-II",
+              "difficulty": "core",
+              "a2z": "binary-search/search-in-rotated-sorted-array-ii"
+            },
+            {
+              "title": "Single element in sorted array",
+              "difficulty": "core",
+              "a2z": "binary-search/single-element-in-a-sorted-array"
+            },
+            {
+              "title": "Search in 2D matrix - II",
+              "difficulty": "core",
+              "a2z": "binary-search/search-in-a-row-and-column-wise-sorted-matrix"
+            },
+            {
+              "title": "Find Peak Element - II",
+              "difficulty": "core",
+              "a2z": "binary-search/find-peak-element-2d-matrix"
+            }
+          ]
+        },
+        {
+          "name": "Search on Answer",
+          "problems": [
+            {
+              "title": "Find Nth root of a number",
+              "difficulty": "core",
+              "a2z": "binary-search/find-the-nth-root-of-a-number-using-binary-search"
+            },
+            {
+              "title": "Koko eating bananas",
+              "difficulty": "pro",
+              "a2z": "binary-search/koko-eating-bananas"
+            },
+            {
+              "title": "Aggressive Cows",
+              "difficulty": "pro",
+              "a2z": "binary-search/aggressive-cows"
+            },
+            {
+              "title": "Book Allocation Problem",
+              "difficulty": "pro",
+              "a2z": "binary-search/book-allocation-problem",
+              "leetcodeurl": "https://leetcode.com/problems/split-array-largest-sum/"
+            },
+            {
+              "title": "Matrix Median",
+              "difficulty": "pro",
+              "a2z": "binary-search/matrix-median"
+            }
+          ]
+        },
+        {
+          "name": "Partition Search",
+          "problems": [
+            {
+              "title": "Kth element of 2 sorted arrays",
+              "difficulty": "pro",
+              "a2z": "binary-search/kth-element-of-2-sorted-arrays"
+            },
+            {
+              "title": "Median of 2 sorted arrays",
+              "difficulty": "pro",
+              "a2z": "binary-search/median-of-2-sorted-arrays"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sliding Window and Two Pointers",
+      "patterns": [
+        {
+          "name": "Sliding Window",
+          "problems": [
+            {
+              "title": "Longest Substring Without Repeating Characters",
+              "difficulty": "core",
+              "a2z": "sliding-window-and-two-pointer/longest-substring-without-repeating-characters"
+            },
+            {
+              "title": "Maximum Points You Can Obtain from Cards",
+              "difficulty": "core",
+              "a2z": "sliding-window-and-two-pointer/maximum-points-you-can-obtain-from-cards"
+            },
+            {
+              "title": "Max Consecutive Ones III",
+              "difficulty": "core",
+              "a2z": "sliding-window-and-two-pointer/max-consecutive-ones-iii"
+            },
+            {
+              "title": "Longest Repeating Character Replacement",
+              "difficulty": "pro",
+              "a2z": "sliding-window-and-two-pointer/longest-repeating-character-replacement"
+            },
+            {
+              "title": "Longest Substring With At Most K Distinct Characters",
+              "difficulty": "pro",
+              "a2z": "sliding-window-and-two-pointer/longest-substring-with-at-most-k-distinct-characters"
+            },
+            {
+              "title": "Minimum Window Substring",
+              "difficulty": "pro",
+              "a2z": "sliding-window-and-two-pointer/minimum-window-substring"
+            }
+          ]
+        },
+        {
+          "name": "Counting Windows",
+          "problems": [
+            {
+              "title": "Number of Substrings Containing All Three Characters",
+              "difficulty": "core",
+              "a2z": "sliding-window-and-two-pointer/number-of-substring-containing-all-three-characters"
+            },
+            {
+              "title": "Binary Subarrays With Sum",
+              "difficulty": "core",
+              "a2z": "sliding-window-and-two-pointer/binary-subarray-with-sum"
+            },
+            {
+              "title": "Count number of Nice subarrays",
+              "difficulty": "pro",
+              "a2z": "sliding-window-and-two-pointer/count-number-of-nice-subarrays"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Recursion and Backtracking",
+      "patterns": [
+        {
+          "name": "Subsets & Combinations",
+          "problems": [
+            {
+              "title": "Power Set",
+              "difficulty": "core",
+              "a2z": "recursion/print-all-subsequences-power-set"
+            },
+            {
+              "title": "Generate Parentheses",
+              "difficulty": "core",
+              "a2z": "recursion/generate-parenthesis"
+            },
+            {
+              "title": "Letter Combinations of a Phone Number",
+              "difficulty": "pro",
+              "a2z": "recursion/letter-combinations-of-a-phone-number"
+            },
+            {
+              "title": "Combination Sum",
+              "difficulty": "core",
+              "a2z": "recursion/combination-sum"
+            },
+            {
+              "title": "Combination Sum II",
+              "difficulty": "core",
+              "a2z": "recursion/combination-sum-ii"
+            },
+            {
+              "title": "Subsets II",
+              "difficulty": "core",
+              "a2z": "recursion/subset-sum-ii"
+            },
+            {
+              "title": "Palindrome partitioning",
+              "difficulty": "pro",
+              "a2z": "recursion/palindrome-partitioning"
+            }
+          ]
+        },
+        {
+          "name": "Backtracking",
+          "problems": [
+            {
+              "title": "Word Search",
+              "difficulty": "pro",
+              "a2z": "recursion/word-search"
+            },
+            {
+              "title": "N Queen",
+              "difficulty": "pro",
+              "a2z": "recursion/n-queen"
+            },
+            {
+              "title": "Sudoku Solver",
+              "difficulty": "pro",
+              "a2z": "recursion/sudoku-solver"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Linked List",
+      "patterns": [
+        {
+          "name": "Fast & Slow Pointers",
+          "problems": [
+            {
+              "title": "Find Middle of Linked List",
+              "difficulty": "basic",
+              "a2z": "linked-list/middle-of-a-linked-list-tortoise-hare-method"
+            },
+            {
+              "title": "Find the intersection point of Y LL",
+              "difficulty": "core",
+              "a2z": "linked-list/find-the-intersection-point-of-y-linked-list"
+            },
+            {
+              "title": "Check if LL is palindrome or not",
+              "difficulty": "core",
+              "a2z": "linked-list/check-if-linked-list-is-palindrome-or-not"
+            },
+            {
+              "title": "Detect a loop in LL",
+              "difficulty": "core",
+              "a2z": "linked-list/detect-a-loop-in-linked-list"
+            },
+            {
+              "title": "Remove Nth node from the back of the LL",
+              "difficulty": "core",
+              "a2z": "linked-list/remove-nth-node-from-the-back-of-the-linked-list"
+            },
+            {
+              "title": "Find the starting point in LL",
+              "difficulty": "core",
+              "a2z": "linked-list/find-the-starting-point-in-linked-list"
+            },
+            {
+              "title": "Length of loop in LL",
+              "difficulty": "core",
+              "a2z": "linked-list/length-of-loop-in-linked-list"
+            }
+          ]
+        },
+        {
+          "name": "Reversal & Rewiring",
+          "problems": [
+            {
+              "title": "Reverse a LL",
+              "difficulty": "core",
+              "a2z": "linked-list/reverse-a-linked-list-iterative"
+            },
+            {
+              "title": "Merge two Sorted Lists",
+              "difficulty": "core",
+              "leetcodeurl": "https://leetcode.com/problems/merge-two-sorted-lists/"
+            },
+            {
+              "title": "Sort a Linked List of 0's 1's and 2's",
+              "difficulty": "core",
+              "a2z": "linked-list/sort-a-linked-list-of-0s-1s-and-2s-by-changing-links"
+            },
+            {
+              "title": "Add two numbers in Linked List",
+              "difficulty": "core",
+              "a2z": "linked-list/add-2-numbers-in-linked-list"
+            },
+            {
+              "title": "Rotate a LL",
+              "difficulty": "core",
+              "a2z": "linked-list/rotate-a-ll"
+            },
+            {
+              "title": "Sort LL",
+              "difficulty": "core",
+              "a2z": "linked-list/sort-linked-list"
+            },
+            {
+              "title": "Clone a LL with random and next pointer",
+              "difficulty": "pro",
+              "a2z": "linked-list/clone-a-linked-list-with-random-and-next-pointer"
+            },
+            {
+              "title": "Reverse LL in group of given size K",
+              "difficulty": "pro",
+              "a2z": "linked-list/reverse-ll-in-group-of-given-size-k"
+            },
+            {
+              "title": "Flattening of LL",
+              "difficulty": "pro",
+              "a2z": "linked-list/flattening-of-ll",
+              "leetcodeurl": "https://leetcode.com/problems/merge-k-sorted-lists/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stack and Queues",
+      "patterns": [
+        {
+          "name": "Monotonic Stack / Queue",
+          "problems": [
+            {
+              "title": "Next Greater Element",
+              "difficulty": "core",
+              "a2z": "stack-queue/next-greater-element"
+            },
+            {
+              "title": "Next Greater Element - 2",
+              "difficulty": "core",
+              "a2z": "stack-queue/next-greater-element-2"
+            },
+            {
+              "title": "Stock span problem",
+              "difficulty": "core",
+              "a2z": "stack-queue/stock-span-problem"
+            },
+            {
+              "title": "Sum of Subarray Minimums",
+              "difficulty": "core",
+              "a2z": "stack-queue/sum-of-subarray-minimum"
+            },
+            {
+              "title": "Sum of Subarray Ranges",
+              "difficulty": "core",
+              "a2z": "stack-queue/sum-of-subarray-ranges"
+            },
+            {
+              "title": "Remove K Digits",
+              "difficulty": "core",
+              "a2z": "stack-queue/remove-k-digits"
+            },
+            {
+              "title": "Sliding Window Maximum",
+              "difficulty": "pro",
+              "a2z": "stack-queue/sliding-window-maximum"
+            },
+            {
+              "title": "Largest rectangle in a histogram",
+              "difficulty": "pro",
+              "a2z": "stack-queue/largest-rectangle-in-a-histogram"
+            },
+            {
+              "title": "Maximum Rectangles",
+              "difficulty": "pro",
+              "a2z": "stack-queue/maximal-rectangles"
+            }
+          ]
+        },
+        {
+          "name": "Data Structure Design",
+          "problems": [
+            {
+              "title": "Implement Min Stack",
+              "difficulty": "core",
+              "a2z": "stack-queue/implement-min-stack"
+            },
+            {
+              "title": "Asteroid Collision",
+              "difficulty": "core",
+              "a2z": "stack-queue/asteroid-collision"
+            },
+            {
+              "title": "Celebrity Problem",
+              "difficulty": "core",
+              "a2z": "stack-queue/the-celebrity-problem"
+            },
+            {
+              "title": "LRU Cache",
+              "difficulty": "pro",
+              "a2z": "stack-queue/lru-cache"
+            },
+            {
+              "title": "LFU Cache",
+              "difficulty": "pro",
+              "a2z": "stack-queue/lfu-cache"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Greedy Algorithms",
+      "patterns": [
+        {
+          "name": "Greedy",
+          "problems": [
+            {
+              "title": "Jump Game - I",
+              "difficulty": "core",
+              "a2z": "greedy/jump-game"
+            },
+            {
+              "title": "Valid Paranthesis Checker",
+              "difficulty": "pro",
+              "a2z": "greedy/valid-parenthesis-checker"
+            },
+            {
+              "title": "Candy",
+              "difficulty": "pro",
+              "a2z": "greedy/candy"
+            }
+          ]
+        },
+        {
+          "name": "Intervals & Scheduling",
+          "problems": [
+            {
+              "title": "N meetings in one room",
+              "difficulty": "core",
+              "a2z": "greedy/n-meetings-in-one-room"
+            },
+            {
+              "title": "Insert Interval",
+              "difficulty": "core",
+              "a2z": "greedy/insert-interval"
+            },
+            {
+              "title": "Non-overlapping Intervals",
+              "difficulty": "core",
+              "a2z": "greedy/non-overlapping-intervals"
+            },
+            {
+              "title": "Minimum number of platforms required for a railway",
+              "difficulty": "core",
+              "a2z": "greedy/minimum-number-of-platforms-required-for-a-railway",
+              "leetcodeurl": "https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/"
+            },
+            {
+              "title": "Job sequencing Problem",
+              "difficulty": "core",
+              "a2z": "greedy/job-sequencing-problem"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Heaps",
+      "patterns": [
+        {
+          "name": "Heap / Priority Queue",
+          "problems": [
+            {
+              "title": "Heapify Algorithm",
+              "difficulty": "core",
+              "gfgurl": "https://www.geeksforgeeks.org/problems/heap-sort/1"
+            },
+            {
+              "title": "Build heap from a given Array",
+              "difficulty": "core",
+              "gfgurl": "https://www.geeksforgeeks.org/problems/heap-sort/1"
+            },
+            {
+              "title": "Implement Min Heap",
+              "difficulty": "core",
+              "gfgurl": "https://www.geeksforgeeks.org/problems/operations-on-binary-min-heap/1"
+            },
+            {
+              "title": "K-th Largest element in an array",
+              "difficulty": "pro",
+              "a2z": "heap/kth-largest-element-in-an-array-use-priority-queue"
+            },
+            {
+              "title": "Find Median from Data Stream",
+              "difficulty": "pro",
+              "a2z": "heap/find-median-from-data-stream"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Binary Trees",
+      "patterns": [
+        {
+          "name": "BFS",
+          "problems": [
+            {
+              "title": "Level Order Traversal",
+              "difficulty": "core",
+              "a2z": "binary-tree/level-order-traversal-level-order-traversal-in-spiral-form"
+            },
+            {
+              "title": "Maximum Width of BT",
+              "difficulty": "pro",
+              "a2z": "binary-tree/maximum-width-of-a-binary-tree"
+            },
+            {
+              "title": "Right/Left View of BT",
+              "difficulty": "core",
+              "a2z": "binary-tree/right-left-view-of-binary-tree"
+            },
+            {
+              "title": "Top View of BT",
+              "difficulty": "core",
+              "a2z": "binary-tree/top-view-of-binary-tree"
+            },
+            {
+              "title": "Print all nodes at a distance of K in BT",
+              "difficulty": "pro",
+              "leetcodeurl": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/"
+            },
+            {
+              "title": "Minimum time taken to burn the BT from a given Node",
+              "difficulty": "pro",
+              "leetcodeurl": "https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/",
+              "gfgurl": "https://www.geeksforgeeks.org/problems/burning-tree/1"
+            },
+            {
+              "title": "Vertical Order Traversal",
+              "difficulty": "pro",
+              "a2z": "binary-tree/vertical-order-traversal-of-binary-tree"
+            }
+          ]
+        },
+        {
+          "name": "DFS / Tree DP",
+          "problems": [
+            {
+              "title": "Print root to leaf path in BT",
+              "difficulty": "core",
+              "leetcodeurl": "https://leetcode.com/problems/binary-tree-paths/",
+              "gfgurl": "https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1"
+            },
+            {
+              "title": "Diameter of Binary Tree",
+              "difficulty": "core",
+              "a2z": "binary-tree/diameter-of-binary-tree"
+            },
+            {
+              "title": "LCA in BT",
+              "difficulty": "pro",
+              "a2z": "binary-tree/lca-in-binary-tree"
+            },
+            {
+              "title": "Boundary Traversal",
+              "difficulty": "core",
+              "a2z": "binary-tree/boundary-traversal-of-binary-tree"
+            },
+            {
+              "title": "Construct a BT from Preorder and Inorder",
+              "difficulty": "core",
+              "a2z": "binary-tree/construct-binary-tree-from-inorder-and-preorder"
+            },
+            {
+              "title": "Morris Inorder Traversal",
+              "difficulty": "pro",
+              "a2z": "binary-tree/morris-inorder-traversal-of-a-binary-tree"
+            },
+            {
+              "title": "Maximum path sum",
+              "difficulty": "pro",
+              "a2z": "binary-tree/maximum-path-sum"
+            },
+            {
+              "title": "Serialize and De-serialize BT",
+              "difficulty": "pro",
+              "a2z": "binary-tree/serialize-and-deserialize-binary-tree"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Binary Search Trees",
+      "patterns": [
+        {
+          "name": "Inorder Traversal",
+          "problems": [
+            {
+              "title": "Insert a given node in BST",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/insert-a-given-node-in-binary-search-tree"
+            },
+            {
+              "title": "LCA in BST",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/lca-in-binary-search-tree"
+            },
+            {
+              "title": "Delete a node in BST",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/delete-a-node-in-binary-search-tree"
+            },
+            {
+              "title": "Inorder successor and predecessor in BST",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/inorder-successor-predecessor-in-bst"
+            },
+            {
+              "title": "Kth Smallest and Largest element in BST",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/find-k-th-smallest-largest-element-in-bst"
+            },
+            {
+              "title": "Check if a tree is a BST or not",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/check-if-a-tree-is-a-bst-or-bt"
+            },
+            {
+              "title": "Construct a BST from a preorder traversal",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/construct-a-bst-from-a-preorder-traversal"
+            },
+            {
+              "title": "Two sum in BST",
+              "difficulty": "core",
+              "a2z": "binary-search-tree/two-sum-in-bst-check-if-there-exists-a-pair-with-sum-k"
+            },
+            {
+              "title": "Correct BST with two nodes swapped",
+              "difficulty": "pro",
+              "a2z": "binary-search-tree/recover-bst-correct-bst-with-two-nodes-swapped"
+            },
+            {
+              "title": "Largest BST in Binary Tree",
+              "difficulty": "pro",
+              "a2z": "binary-search-tree/largest-bst-in-binary-tree",
+              "leetcodeurl": "https://leetcode.com/problems/largest-bst-subtree/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Graphs",
+      "patterns": [
+        {
+          "name": "BFS / DFS",
+          "problems": [
+            {
+              "title": "Flood fill algorithm",
+              "difficulty": "core",
+              "a2z": "graph/flood-fill"
+            },
+            {
+              "title": "Number of islands",
+              "difficulty": "core",
+              "leetcodeurl": "https://leetcode.com/problems/number-of-islands/"
+            },
+            {
+              "title": "Rotten Oranges",
+              "difficulty": "core",
+              "a2z": "graph/rotten-oranges"
+            },
+            {
+              "title": "Distance of nearest cell having one",
+              "difficulty": "core",
+              "a2z": "graph/01-matrix"
+            },
+            {
+              "title": "Surrounded Regions",
+              "difficulty": "core",
+              "a2z": "graph/surrounded-regions"
+            },
+            {
+              "title": "Number of distinct islands",
+              "difficulty": "core",
+              "a2z": "graph/number-of-distinct-islands"
+            },
+            {
+              "title": "Detect a cycle in an undirected graph",
+              "difficulty": "core",
+              "a2z": "graph/cycle-detection-in-undirected-graph-bfs"
+            },
+            {
+              "title": "Bipartite graph",
+              "difficulty": "core",
+              "a2z": "graph/bipartite-graph"
+            }
+          ]
+        },
+        {
+          "name": "Ordering & Connectivity",
+          "problems": [
+            {
+              "title": "Detect a cycle in a directed graph",
+              "difficulty": "core",
+              "a2z": "graph/cycle-detection-in-directed-graph",
+              "leetcodeurl": "https://leetcode.com/problems/course-schedule/"
+            },
+            {
+              "title": "Topological sort or Kahn's algorithm",
+              "difficulty": "core",
+              "a2z": "graph/topo-sort"
+            },
+            {
+              "title": "Course Schedule II",
+              "difficulty": "pro",
+              "a2z": "graph/course-schedule-ii"
+            },
+            {
+              "title": "Alien Dictionary",
+              "difficulty": "pro",
+              "a2z": "graph/alien-dictionary",
+              "leetcodeurl": "https://leetcode.com/problems/alien-dictionary/"
+            },
+            {
+              "title": "Kosaraju's algorithm",
+              "difficulty": "pro",
+              "a2z": "graph/kosarajus-algorithm",
+              "leetcodeurl": "https://leetcode.com/problems/maximum-number-of-non-overlapping-substrings/discuss/766485/kosaraju-algorithm-on"
+            },
+            {
+              "title": "Bridges in graph",
+              "difficulty": "pro",
+              "a2z": "graph/bridges-in-graph"
+            },
+            {
+              "title": "Articulation point in graph",
+              "difficulty": "pro",
+              "a2z": "graph/articulation-point"
+            }
+          ]
+        },
+        {
+          "name": "Shortest Path",
+          "problems": [
+            {
+              "title": "Shortest path in undirected graph with unit weights",
+              "difficulty": "core",
+              "a2z": "graph/shortest-path-in-ug-with-unit-weights"
+            },
+            {
+              "title": "Shortest path in DAG",
+              "difficulty": "core",
+              "a2z": "graph/shortest-path-in-dag"
+            },
+            {
+              "title": "Dijkstra's algorithm",
+              "difficulty": "core",
+              "a2z": "graph/dijkstras-algorithm"
+            },
+            {
+              "title": "Path with minimum effort",
+              "difficulty": "core",
+              "a2z": "graph/path-with-minimum-effort"
+            },
+            {
+              "title": "Cheapest flight within K stops",
+              "difficulty": "pro",
+              "a2z": "graph/cheapest-flights-within-k-stops"
+            },
+            {
+              "title": "Bellman ford algorithm",
+              "difficulty": "pro",
+              "a2z": "graph/bellman-ford-algorithm"
+            },
+            {
+              "title": "Floyd warshall algorithm",
+              "difficulty": "pro",
+              "a2z": "graph/floyd-warshall-algorithm"
+            },
+            {
+              "title": "Word ladder I",
+              "difficulty": "pro",
+              "a2z": "graph/word-ladder-i"
+            },
+            {
+              "title": "Word ladder II",
+              "difficulty": "pro",
+              "a2z": "graph/word-ladder-ii"
+            }
+          ]
+        },
+        {
+          "name": "DSU / MST",
+          "problems": [
+            {
+              "title": "Disjoint Set",
+              "difficulty": "core",
+              "a2z": "graph/disjoint-set-union"
+            },
+            {
+              "title": "Find the MST weight",
+              "difficulty": "core",
+              "a2z": "graph/minimum-spanning-tree",
+              "leetcodeurl": "https://leetcode.com/problems/connecting-cities-with-minimum-cost/"
+            },
+            {
+              "title": "Number of operations to make network connected",
+              "difficulty": "core",
+              "a2z": "graph/number-of-operations-to-make-network-connected"
+            },
+            {
+              "title": "Number of islands II",
+              "difficulty": "pro",
+              "leetcodeurl": "https://leetcode.com/problems/number-of-islands-ii/"
+            },
+            {
+              "title": "Making a large island",
+              "difficulty": "pro",
+              "a2z": "graph/making-a-large-island"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dynamic Programming",
+      "patterns": [
+        {
+          "name": "State Transition DP",
+          "problems": [
+            {
+              "title": "Frog jump with K distances",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/frog-jump-with-k-distances-dp-4"
+            },
+            {
+              "title": "House robber",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/maximum-sum-of-non-adjacent-elements-dp-5"
+            },
+            {
+              "title": "Ninja's training",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/ninjas-training-dp-7"
+            },
+            {
+              "title": "Unique paths II",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/grid-unique-paths-2-dp-9"
+            },
+            {
+              "title": "Best time to buy and sell stock with transaction fees",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/buy-and-sell-stocks-with-transaction-fee-dp-40"
+            },
+            {
+              "title": "Best time to buy and sell stock IV",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/buy-and-sell-stock-iv-dp-38"
+            }
+          ]
+        },
+        {
+          "name": "Knapsack DP",
+          "problems": [
+            {
+              "title": "0 and 1 Knapsack",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/0-1-knapsack-dp-19"
+            },
+            {
+              "title": "Partition a set into two subsets with minimum absolute sum difference",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/partition-set-into-2-subsets-with-min-absolute-sum-diff-dp-16"
+            },
+            {
+              "title": "Target sum",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/target-sum-dp-21"
+            },
+            {
+              "title": "Coin change II",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/coin-change-2-dp-22"
+            }
+          ]
+        },
+        {
+          "name": "Sequence DP",
+          "problems": [
+            {
+              "title": "Longest common subsequence",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/longest-common-subsequence-dp-25"
+            },
+            {
+              "title": "Longest common substring",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/longest-common-substring-dp-27"
+            },
+            {
+              "title": "Longest palindromic subsequence",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/longest-palindromic-subsequence-dp-28"
+            },
+            {
+              "title": "Longest Increasing Subsequence",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/longest-increasing-subsequence-dp-41"
+            },
+            {
+              "title": "Number of Longest Increasing Subsequences",
+              "difficulty": "core",
+              "a2z": "dynamic-programming/number-of-longest-increasing-subsequences-dp-47"
+            },
+            {
+              "title": "Edit distance",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/edit-distance-dp-33"
+            },
+            {
+              "title": "Wildcard matching",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/wildcard-matching-dp-34"
+            }
+          ]
+        },
+        {
+          "name": "Partition DP",
+          "problems": [
+            {
+              "title": "Matrix chain multiplication",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/matrix-chain-multiplication-dp-48"
+            },
+            {
+              "title": "Palindrome partitioning II",
+              "difficulty": "pro",
+              "a2z": "dynamic-programming/palindrome-partitioning-ii-dp-53"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tries",
+      "patterns": [
+        {
+          "name": "Trie",
+          "problems": [
+            {
+              "title": "Trie Implementation and Advanced Operations",
+              "difficulty": "core",
+              "a2z": "tries/implement-trie-2-prefix-tree"
+            },
+            {
+              "title": "Longest Word with All Prefixes",
+              "difficulty": "core",
+              "a2z": "tries/longest-string-with-all-prefixes",
+              "leetcodeurl": "https://leetcode.com/problems/longest-word-with-all-prefixes/"
+            },
+            {
+              "title": "Number of distinct substrings in a string",
+              "difficulty": "pro",
+              "a2z": "tries/number-of-distinct-substrings-in-a-string"
+            },
+            {
+              "title": "Maximum XOR of two numbers in an array",
+              "difficulty": "core",
+              "a2z": "tries/maximum-xor-of-two-numbers-in-an-array"
+            },
+            {
+              "title": "Maximum Xor with an element from an array",
+              "difficulty": "pro",
+              "a2z": "tries/maximum-xor-with-an-element-from-array"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Strings",
+      "patterns": [
+        {
+          "name": "String Matching",
+          "problems": [
+            {
+              "title": "Rabin Karp Algorithm",
+              "difficulty": "pro",
+              "a2z": "strings-advance/rabin-karp"
+            },
+            {
+              "title": "Z function",
+              "difficulty": "pro",
+              "a2z": "strings-advance/z-function"
+            },
+            {
+              "title": "KMP Algorithm or LPS array",
+              "difficulty": "pro",
+              "a2z": "strings-advance/kmp-algorithm-lps-pi-array"
+            },
+            {
+              "title": "Shortest Palindrome",
+              "difficulty": "pro",
+              "a2z": "strings-advance/shortest-palindrome"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bit Manipulation",
+      "patterns": [
+        {
+          "name": "Bit Manipulation",
+          "problems": [
+            {
+              "title": "Power Set Bit Manipulation",
+              "difficulty": "core",
+              "a2z": "bit-manipulation/power-set"
+            },
+            {
+              "title": "Single Number - II",
+              "difficulty": "core",
+              "leetcodeurl": "https://leetcode.com/problems/single-number-ii/"
+            },
+            {
+              "title": "Single Number - III",
+              "difficulty": "pro",
+              "a2z": "bit-manipulation/find-the-two-numbers-appearing-odd-number-of-times",
+              "leetcodeurl": "https://leetcode.com/problems/single-number-iii/"
+            },
+            {
+              "title": "Find the repeating and missing number",
+              "difficulty": "core",
+              "a2z": "arrays/find-the-repeating-and-missing-number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mathematics",
+      "patterns": [
+        {
+          "name": "Number Theory",
+          "problems": [
+            {
+              "title": "Print all primes till N",
+              "difficulty": "core",
+              "leetcodeurl": "https://leetcode.com/problems/count-primes/",
+              "gfgurl": "https://www.geeksforgeeks.org/problems/sieve-of-eratosthenes5242/1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

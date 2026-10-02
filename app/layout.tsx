@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { IconSprite } from "@/components/icons";
 import { JsonLd } from "@/components/JsonLd";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/seo-copy";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { A2Z_NAME, SDE_NAME, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geist = Geist({
@@ -40,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@context": "https://schema.org",
             "@type": "WebSite",
             name: SITE_NAME,
+            alternateName: [A2Z_NAME, SDE_NAME],
             url: SITE_URL,
             description: HOME_DESCRIPTION,
             inLanguage: "en",

@@ -54,6 +54,8 @@ npm run build      # static export in out/
 npm run preview    # serve out/ on http://localhost:3001
 ```
 
-Problems live in `problems/problems.json`; topic names, URLs and
-descriptions in `lib/topic-meta.ts`. Saved progress is keyed by topic key
-and title, so renaming a problem resets its tick for people who solved it.
+Problems live in `problems/problems.json` (A2Z) and
+`problems/sde-sheet.json` (SDE); A2Z topic names, URLs and descriptions in
+`lib/topic-meta.ts`. Saved progress is keyed by A2Z topic key and title
+(SDE-only problems by title), so renaming a problem resets its tick for
+people who solved it.

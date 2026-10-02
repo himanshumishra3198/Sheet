@@ -26,6 +26,11 @@ export type Topic = {
   number: number;
   problems: Problem[];
   counts: Counts;
+  // Optional sub-headings (the SDE sheet's patterns): consecutive runs of
+  // `problems`, given as sizes so problems aren't serialized twice.
+  groups?: { name: string; size: number }[];
+  // The topic's own page, when it has one.
+  href?: string;
 };
 
 type RawProblem = {
@@ -35,7 +40,7 @@ type RawProblem = {
   gfgurl?: string;
 };
 
-function slugify(value: string): string {
+export function slugify(value: string): string {
   return value
     .toLowerCase()
     .replace(/['`]/g, "")
@@ -79,10 +84,13 @@ export const topics: Topic[] = Object.entries(
     number: i + 1,
     problems,
     counts: countByDifficulty(problems),
+    href: `/topics/${meta.slug}`,
   };
 });
 
 export const allProblems: Problem[] = topics.flatMap((t) => t.problems);
+
+export const problemById = new Map(allProblems.map((p) => [p.id, p]));
 
 export const totals: Counts = countByDifficulty(allProblems);
 

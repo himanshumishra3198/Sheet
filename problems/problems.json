@@ -2655,10 +2655,10 @@
       "topic": "dynamic programming"
     },
     {
-      "title": "assign cookies",
+      "title": "0/1 knapsack (dp-19)",
       "difficulty": "hard",
-      "gfgurl": "https://www.geeksforgeeks.org/problems/assign-cookies/1",
-      "leetcodeurl": "https://leetcode.com/problems/assign-cookies/",
+      "gfgurl": "https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1",
+      "leetcodeurl": "",
       "topic": "dynamic programming"
     },
     {

@@ -95,18 +95,63 @@ export function TopicSection({
         />
       </div>
       <div id={panelId} ref={panel} hidden={!open} className="border-t border-line">
-        <div className="flex flex-col gap-2 px-4 py-3 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-5">
-          <p className="max-w-2xl">{topic.summary}</p>
-          <Link
-            href={`/topics/${topic.slug}`}
-            className="inline-flex shrink-0 items-center gap-1 font-medium text-accent hover:underline"
-          >
-            {topic.name} page
-            <ArrowRight className="size-3.5" aria-hidden="true" />
-          </Link>
-        </div>
-        <ProblemList problems={problems} solved={solved} onToggle={onToggle} />
+        {(topic.summary || topic.href) && (
+          <div className="flex flex-col gap-2 px-4 py-3 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-5">
+            {topic.summary && <p className="max-w-2xl">{topic.summary}</p>}
+            {topic.href && (
+              <Link
+                href={topic.href}
+                className="inline-flex shrink-0 items-center gap-1 font-medium text-accent hover:underline"
+              >
+                {topic.name} page
+                <ArrowRight className="size-3.5" aria-hidden="true" />
+              </Link>
+            )}
+          </div>
+        )}
+        {topic.groups ? (
+          <GroupedList topic={topic} problems={problems} solved={solved} onToggle={onToggle} />
+        ) : (
+          <ProblemList problems={problems} solved={solved} onToggle={onToggle} />
+        )}
       </div>
     </section>
+  );
+}
+
+// Problems under their pattern sub-headings; `problems` is the filtered
+// subset to show.
+function GroupedList({
+  topic,
+  problems,
+  solved,
+  onToggle,
+}: {
+  topic: Topic;
+  problems: Problem[];
+  solved: ReadonlySet<string>;
+  onToggle: ToggleSolved;
+}) {
+  const visible = new Set(problems.map((p) => p.id));
+  let start = 0;
+  const groups = (topic.groups ?? []).map((g) => {
+    const items = topic.problems.slice(start, (start += g.size)).filter((p) => visible.has(p.id));
+    return { name: g.name, items };
+  });
+  return (
+    <>
+      {groups.map(
+        (g) =>
+          g.items.length > 0 && (
+            <div key={g.name} className="border-t border-line first:border-t-0">
+              <h4 className="flex items-baseline gap-2 bg-surface-2/50 px-4 py-2 text-xs font-semibold tracking-wide text-muted uppercase sm:px-5">
+                {g.name}
+                <span className="font-normal normal-case tabular-nums">· {g.items.length}</span>
+              </h4>
+              <ProblemList problems={g.items} solved={solved} onToggle={onToggle} />
+            </div>
+          )
+      )}
+    </>
   );
 }

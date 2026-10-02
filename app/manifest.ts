@@ -6,8 +6,8 @@ export const dynamic = "force-static";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: SITE_NAME,
-    short_name: "DSA Sheet",
-    description: "Track your progress through the A2Z DSA sheet.",
+    short_name: SITE_NAME,
+    description: "Track your progress through the A2Z DSA Sheet and the SDE Sheet.",
     start_url: "/",
     display: "standalone",
     background_color: "#0b0b0f",

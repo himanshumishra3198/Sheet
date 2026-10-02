@@ -4,7 +4,8 @@ import { ArrowRight, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { DIFFICULTIES, type Difficulty, type Problem, type Topic } from "@/lib/problems";
 import { resetProgress } from "@/lib/progress";
-import { Bar, DIFFICULTY_LABEL, Ring } from "./Meters";
+import { useLevels } from "./levels";
+import { Bar, Ring } from "./Meters";
 
 export function ProgressPanel({
   topics,
@@ -17,6 +18,7 @@ export function ProgressPanel({
   hydrated: boolean;
   onContinue: (problemId: string) => void;
 }) {
+  const levels = useLevels();
   const stats = useMemo(() => {
     const done: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
     const total: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
@@ -68,7 +70,7 @@ export function ProgressPanel({
         {DIFFICULTIES.map((d) => (
           <li key={d}>
             <div className="flex justify-between text-sm">
-              <span className="text-muted">{DIFFICULTY_LABEL[d]}</span>
+              <span className="text-muted">{levels[d]}</span>
               <span className="tabular-nums">
                 {hydrated ? stats.done[d] : "–"}
                 <span className="text-muted"> / {stats.total[d]}</span>

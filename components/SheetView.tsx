@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import type { Levels } from "@/lib/levels";
 import type { Topic } from "@/lib/problems";
 import { useHydrated, useSolved } from "@/lib/progress";
+import { LevelsProvider } from "./levels";
 import { useToggleSolved } from "./ProblemList";
 import { ProgressPanel } from "./ProgressPanel";
 import { Toolbar } from "./Toolbar";
@@ -11,7 +13,17 @@ import { useProblemFilter } from "./useProblemFilter";
 
 const EMPTY: ReadonlySet<string> = new Set();
 
-export function HomeView({ topics, children }: { topics: Topic[]; children: ReactNode }) {
+// One sheet: hero (children) with the progress panel, then the toolbar and
+// collapsible topics. Used by both the A2Z and the SDE sheet.
+export function SheetView({
+  topics,
+  levels,
+  children,
+}: {
+  topics: Topic[];
+  levels: Levels;
+  children: ReactNode;
+}) {
   const solved = useSolved();
   const hydrated = useHydrated();
   const filter = useProblemFilter();
@@ -100,7 +112,7 @@ export function HomeView({ topics, children }: { topics: Topic[]; children: Reac
   const allOpen = visible.every((s) => open.has(s.topic.slug));
 
   return (
-    <>
+    <LevelsProvider value={levels}>
       <div className="mx-auto grid max-w-5xl items-start gap-8 px-4 pt-10 pb-12 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_20rem]">
         {children}
         <ProgressPanel
@@ -173,6 +185,6 @@ export function HomeView({ topics, children }: { topics: Topic[]; children: Reac
           </div>
         )}
       </section>
-    </>
+    </LevelsProvider>
   );
 }

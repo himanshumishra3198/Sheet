@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import { HomeView } from "@/components/HomeView";
+import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
+import { SheetView } from "@/components/SheetView";
+import { A2Z_LEVELS } from "@/lib/levels";
 import { topics, totals } from "@/lib/problems";
+import { sdeTotals } from "@/lib/sde";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/seo-copy";
-import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { A2Z_NAME, SDE_NAME, SDE_PATH, SITE_URL, socialMetadata } from "@/lib/site";
 
 export const metadata: Metadata = socialMetadata({
   title: HOME_TITLE,
   description: HOME_DESCRIPTION,
   path: "/",
 });
-
-const STATS = [
-  { label: "problems", value: totals.total },
-  { label: "topics", value: topics.length },
-  { label: "easy", value: totals.easy, className: "text-easy" },
-  { label: "medium", value: totals.medium, className: "text-medium" },
-  { label: "hard", value: totals.hard, className: "text-hard" },
-];
 
 export default function Home() {
   return (
@@ -26,7 +21,7 @@ export default function Home() {
         data={{
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: `${SITE_NAME} topics`,
+          name: `${A2Z_NAME} topics`,
           numberOfItems: topics.length,
           itemListElement: topics.map((t) => ({
             "@type": "ListItem",
@@ -36,32 +31,25 @@ export default function Home() {
           })),
         }}
       />
-      <HomeView topics={topics}>
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-            A2Z DSA Sheet,{" "}
-            <span className="bg-gradient-to-r from-accent to-[#c084fc] bg-clip-text text-transparent">
-              reimagined & free
-            </span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-pretty text-muted">
-            Every problem from the A2Z DSA sheet, from basics to dynamic
-            programming, with direct links to practise on LeetCode and
-            GeeksforGeeks. Tick problems off as you go and pick up where you
-            left off.
-          </p>
-          <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-            {STATS.map((s) => (
-              <li key={s.label}>
-                <span className={`mr-1.5 text-xl font-semibold tabular-nums ${s.className ?? "text-fg"}`}>
-                  {s.value}
-                </span>
-                {s.label}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </HomeView>
+      <SheetView topics={topics} levels={A2Z_LEVELS}>
+        <Hero
+          title={A2Z_NAME}
+          highlight="reimagined & free"
+          intro="Every problem from the A2Z DSA sheet, from basics to dynamic programming, with direct links to practise on LeetCode and GeeksforGeeks. Tick problems off as you go and pick up where you left off."
+          stats={[
+            { label: "problems", value: totals.total },
+            { label: "topics", value: topics.length },
+            { label: "easy", value: totals.easy, tone: "easy" },
+            { label: "medium", value: totals.medium, tone: "medium" },
+            { label: "hard", value: totals.hard, tone: "hard" },
+          ]}
+          crossLink={{
+            href: SDE_PATH,
+            lead: "Short on time?",
+            label: `${SDE_NAME}: ${sdeTotals.total} must-do interview problems by pattern`,
+          }}
+        />
+      </SheetView>
     </main>
   );
 }

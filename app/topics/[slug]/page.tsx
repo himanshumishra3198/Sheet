@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { TopicView } from "@/components/TopicView";
 import { getTopic, topics, type Topic } from "@/lib/problems";
-import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { A2Z_NAME, SITE_URL, socialMetadata } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -33,10 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const withCount = `${topic.summary} ${topic.counts.total} problems with LeetCode and GFG links.`;
   const description = withCount.length <= 160 ? withCount : topic.summary;
   return {
-    title,
+    title: { absolute: `${title} | ${A2Z_NAME}` },
     description,
     ...socialMetadata({
-      title: `${title} | ${SITE_NAME}`,
+      title: `${title} | ${A2Z_NAME}`,
       description,
       path: `/topics/${topic.slug}`,
     }),
@@ -56,7 +56,7 @@ export default async function TopicPage({ params }: Props) {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: SITE_NAME, item: SITE_URL },
+            { "@type": "ListItem", position: 1, name: A2Z_NAME, item: SITE_URL },
             {
               "@type": "ListItem",
               position: 2,
@@ -70,7 +70,7 @@ export default async function TopicPage({ params }: Props) {
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>
             <Link href="/" className="hover:text-fg">
-              {SITE_NAME}
+              {A2Z_NAME}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
