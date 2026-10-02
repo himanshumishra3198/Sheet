@@ -7,7 +7,7 @@ tracking that lives in the browser. Live at https://hm0.org.
   `problems/problems.json`, with topic names, URLs and descriptions in
   `lib/topic-meta.ts`.
 - **SDE Sheet** (`/sde-sheet`): `problems/sde-sheet.json`, topics ->
-  patterns -> problems, graded Basic / Core / Pro. A problem that is also on
+  patterns -> problems. A problem that is also on
   the A2Z sheet names it in `a2z`; it then shares that problem's links and
   its tick (solve it once, it's solved in both sheets). `leetcodeurl` /
   `gfgurl` on an SDE entry fill in links the A2Z entry lacks.

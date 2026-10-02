@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
 import { SheetView } from "@/components/SheetView";
-import { SDE_LEVELS } from "@/lib/levels";
 import { totals } from "@/lib/problems";
 import { sdePatternCount, sdeTopics, sdeTotals } from "@/lib/sde";
 import { SDE_DESCRIPTION, SDE_TITLE } from "@/lib/seo-copy";
@@ -36,7 +35,7 @@ export default function SdeSheet() {
           })),
         }}
       />
-      <SheetView topics={sdeTopics} levels={SDE_LEVELS}>
+      <SheetView topics={sdeTopics}>
         <Hero
           title={SDE_NAME}
           highlight="pattern by pattern"
@@ -45,9 +44,9 @@ export default function SdeSheet() {
             { label: "problems", value: sdeTotals.total },
             { label: "topics", value: sdeTopics.length },
             { label: "patterns", value: sdePatternCount },
-            { label: "basic", value: sdeTotals.easy, tone: "easy" },
-            { label: "core", value: sdeTotals.medium, tone: "medium" },
-            { label: "pro", value: sdeTotals.hard, tone: "hard" },
+            { label: "easy", value: sdeTotals.easy, tone: "easy" },
+            { label: "medium", value: sdeTotals.medium, tone: "medium" },
+            { label: "hard", value: sdeTotals.hard, tone: "hard" },
           ]}
           crossLink={{
             href: "/",

@@ -3,8 +3,7 @@
 import { useMemo, type ReactNode } from "react";
 import { DIFFICULTIES, type Topic } from "@/lib/problems";
 import { useHydrated, useSolved } from "@/lib/progress";
-import { Bar } from "./Meters";
-import { useLevels } from "./levels";
+import { Bar, DIFFICULTY_LABEL } from "./Meters";
 import { ProblemList, useToggleSolved } from "./ProblemList";
 import { Toolbar } from "./Toolbar";
 import { useProblemFilter } from "./useProblemFilter";
@@ -16,7 +15,6 @@ export function TopicView({ topic, children }: { topic: Topic; children: ReactNo
   const hydrated = useHydrated();
   const filter = useProblemFilter();
   const onToggle = useToggleSolved();
-  const levels = useLevels();
 
   const done = useMemo(() => {
     const counts = { easy: 0, medium: 0, hard: 0, total: 0 };
@@ -52,7 +50,7 @@ export function TopicView({ topic, children }: { topic: Topic; children: ReactNo
           <dl className="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
             {DIFFICULTIES.map((d) => (
               <div key={d} className="rounded-lg bg-surface-2 px-2 py-2">
-                <dt className={`text-xs ${LABEL_COLOR[d]}`}>{levels[d]}</dt>
+                <dt className={`text-xs ${LABEL_COLOR[d]}`}>{DIFFICULTY_LABEL[d]}</dt>
                 <dd className="mt-0.5 tabular-nums">
                   {hydrated ? done[d] : "–"}
                   <span className="text-muted">/{topic.counts[d]}</span>

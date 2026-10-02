@@ -12,9 +12,9 @@ export default function OpenGraphImage() {
     title: SDE_NAME,
     subtitle: `${sdeTotals.total} problems · ${sdePatternCount} patterns · ${sdeTopics.length} topics`,
     chips: [
-      { label: "Basic", value: sdeTotals.easy },
-      { label: "Core", value: sdeTotals.medium },
-      { label: "Pro", value: sdeTotals.hard },
+      { label: "Easy", value: sdeTotals.easy },
+      { label: "Medium", value: sdeTotals.medium },
+      { label: "Hard", value: sdeTotals.hard },
     ],
   });
 }

@@ -2,6 +2,7 @@ import data from "@/problems/sde-sheet.json";
 import { formatTitle } from "./format-title";
 import {
   countByDifficulty,
+  DIFFICULTIES,
   problemById,
   slugify,
   type Difficulty,
@@ -16,7 +17,7 @@ import {
 
 type RawProblem = {
   title: string;
-  difficulty: "basic" | "core" | "pro";
+  difficulty: Difficulty;
   a2z?: string;
   leetcodeurl?: string;
   gfgurl?: string;
@@ -27,12 +28,6 @@ type RawTopic = {
   patterns: { name: string; problems: RawProblem[] }[];
 };
 
-const TIER: Record<RawProblem["difficulty"], Difficulty> = {
-  basic: "easy",
-  core: "medium",
-  pro: "hard",
-};
-
 const seen = new Set<string>();
 
 function toProblem(raw: RawProblem): Problem {
@@ -40,7 +35,7 @@ function toProblem(raw: RawProblem): Problem {
   if (raw.a2z && !shared) {
     throw new Error(`SDE problem "${raw.title}" points at unknown A2Z problem "${raw.a2z}"`);
   }
-  if (!TIER[raw.difficulty]) {
+  if (!DIFFICULTIES.includes(raw.difficulty)) {
     throw new Error(`Unknown SDE difficulty "${raw.difficulty}" for "${raw.title}"`);
   }
   const id = shared?.id ?? `sde/${slugify(raw.title)}`;
@@ -49,7 +44,7 @@ function toProblem(raw: RawProblem): Problem {
   return {
     id,
     title: formatTitle(raw.title),
-    difficulty: TIER[raw.difficulty],
+    difficulty: raw.difficulty,
     leetcodeUrl: shared?.leetcodeUrl ?? raw.leetcodeurl ?? null,
     gfgUrl: shared?.gfgUrl ?? raw.gfgurl ?? null,
   };

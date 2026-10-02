@@ -1,5 +1,10 @@
 import type { Difficulty } from "@/lib/problems";
-import { useLevels } from "./levels";
+
+export const DIFFICULTY_LABEL: Record<Difficulty, string> = {
+  easy: "Easy",
+  medium: "Medium",
+  hard: "Hard",
+};
 
 const BAR_COLOR: Record<Difficulty | "solved", string> = {
   easy: "bg-easy",
@@ -9,8 +14,7 @@ const BAR_COLOR: Record<Difficulty | "solved", string> = {
 };
 
 export function DifficultyBadge({ difficulty }: { difficulty: Difficulty }) {
-  const levels = useLevels();
-  return <span className={`badge badge-${difficulty}`}>{levels[difficulty]}</span>;
+  return <span className={`badge badge-${difficulty}`}>{DIFFICULTY_LABEL[difficulty]}</span>;
 }
 
 // Decorative: the numbers next to it carry the meaning.

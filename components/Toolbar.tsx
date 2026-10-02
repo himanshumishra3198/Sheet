@@ -2,7 +2,6 @@
 
 import { Search, X } from "lucide-react";
 import { useEffect, useRef, type ReactNode } from "react";
-import { useLevels } from "./levels";
 import type { DifficultyFilter, ProblemFilter, StatusFilter } from "./useProblemFilter";
 
 function Segmented<T extends string>({
@@ -37,6 +36,13 @@ function Segmented<T extends string>({
   );
 }
 
+const DIFFICULTY_OPTIONS: { value: DifficultyFilter; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "easy", label: "Easy" },
+  { value: "medium", label: "Medium" },
+  { value: "hard", label: "Hard" },
+];
+
 const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "todo", label: "To do" },
@@ -53,13 +59,6 @@ export function Toolbar({
   children?: ReactNode;
 }) {
   const input = useRef<HTMLInputElement>(null);
-  const levels = useLevels();
-  const difficultyOptions: { value: DifficultyFilter; label: string }[] = [
-    { value: "all", label: "All" },
-    { value: "easy", label: levels.easy },
-    { value: "medium", label: levels.medium },
-    { value: "hard", label: levels.hard },
-  ];
 
   // "/" jumps to search, as on GitHub and LeetCode.
   useEffect(() => {
@@ -117,7 +116,7 @@ export function Toolbar({
       <Segmented
         label="Difficulty"
         value={filter.difficulty}
-        options={difficultyOptions}
+        options={DIFFICULTY_OPTIONS}
         onChange={filter.setDifficulty}
       />
       <Segmented

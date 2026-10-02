@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
 import { SheetView } from "@/components/SheetView";
-import { A2Z_LEVELS } from "@/lib/levels";
 import { topics, totals } from "@/lib/problems";
 import { sdeTotals } from "@/lib/sde";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/seo-copy";
@@ -31,7 +30,7 @@ export default function Home() {
           })),
         }}
       />
-      <SheetView topics={topics} levels={A2Z_LEVELS}>
+      <SheetView topics={topics}>
         <Hero
           title={A2Z_NAME}
           highlight="reimagined & free"
