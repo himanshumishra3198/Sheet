@@ -40,7 +40,7 @@ export default function Home() {
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
             <span className="size-1.5 rounded-full bg-solved" aria-hidden="true" />
-            Free · No sign-up · Progress saved in your browser
+            Free · No sign-up
           </p>
           <h1 className="mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
             A2Z DSA Sheet,{" "}
